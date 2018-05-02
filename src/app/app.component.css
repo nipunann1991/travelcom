@@ -1,0 +1,2 @@
+.dashbaord{padding:0;height:100vh;width:100vw}.dashbaord .header{height:50px;width:100%;background:#232a32;position:fixed;top:0}.dashbaord .content_wrapper{width:100%;margin-top:50px;height:100%}.dashbaord .content_wrapper .nav_content{width:200px;background:rgba(41,51,61,0.95);height:inherit;position:fixed}.dashbaord .content_wrapper .right_content{padding-left:200px;width:100%;height:inherit}.dashbaord .content_wrapper .right_content .right_content_inner{padding:30px}
+/*# sourceMappingURL=app.component.css.map */

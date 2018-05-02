@@ -1,0 +1,26 @@
+
+<div class="container-fluid login">
+	<div class="container inner">
+
+		<div class="login_box">
+			<form class="ui form">
+			  <div class="field">
+			    <label>Username</label>
+			    <input type="text" name="username"  [(ngModel)]="loginDetails.username" placeholder="Username">
+			  </div>
+			  <div class="field">
+			    <label>Password</label>
+			    <input type="password" name="password" [(ngModel)]="loginDetails.password"  placeholder="password">
+			  </div>
+			  <div class="field">
+			    <div class="ui checkbox">
+			      <input type="checkbox" tabindex="0" class="hidden">
+			      <label>Remember Me</label>
+			    </div>
+			  </div>
+			  <button class="ui button green" id="login" type="submit" (click)="login()">Login</button>
+			</form>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,89 @@
+ 
+@mixin viewport($height: 100vh, $width: 100vw){
+	height: $height ;
+	width: $width;
+}
+
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+
+@mixin calc($key, $value) { 
+  #{$key}: -webkit-calc(#{$value});
+   #{$key}: -moz-calc(#{$value}); 
+   #{$key}: calc(#{$value}); 
+ }
+
+@mixin inherit-parent($height: inherit, $width: inherit){
+	height: $height ;
+	width: $width;
+}
+
+@mixin background-image($imgpath,$position:0 0,$repeat: no-repeat, $bg-size: cover) {
+    background: {
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+        size: $bg-size;
+    }
+}
+
+@mixin transition-effect($to: all,$duration: 0.5s,$type: ease)   { 
+  -webkit-transition: $to $duration $type; 
+  -moz-transition: $to $duration $type; 
+  transition: $to $duration $type; 
+}
+
+@mixin transform-translate($x, $y){ 
+  -webkit-transform: translate($x, $y);  
+  -o-transform: translate($x, $y); 
+  -moz-transform: translate($x, $y); 
+  transform: translate($x, $y);
+}
+
+@mixin rotate($deg){
+  -webkit-transform: rotate($deg);
+  -moz-transform: rotate($deg);
+  -ms-transform: rotate($deg);
+  -o-transform: rotate($deg);
+  transform: rotate($deg);
+}
+
+/* Mixin Breakpoints */
+
+@mixin mobile-sm() {
+  @media (max-width: #{$mobile-sm-width}) {
+    @content;
+  }
+}
+
+@mixin custom-max-width($custom-width) {
+  @media (max-width: #{$custom-width}) {
+    @content;
+  }
+}
+
+@mixin custom-width($custom-width-min, $custom-width-max) {
+  @media (min-width: #{$custom-width-min}) and (max-width: #{$custom-width-max}) {
+    @content;
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-sm-width - 1px}) {
+    @content;
+  }
+}

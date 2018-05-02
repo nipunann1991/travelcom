@@ -1,0 +1,178 @@
+@import '../../assets/sass/main';
+
+.search_hotel{
+
+	.block{
+ 
+		.title{
+			padding: 10px 0; 
+			background: #e5e5e5; 
+			margin: 0 -15px;
+
+			h3{
+				text-align: center;
+				font-size: $font_size  + 3;    
+			}
+		}
+ 
+
+		&.search_options{
+			background: #eee;
+
+			.body{
+				padding: 30px 0; 
+			}
+
+			.ui.form{
+
+				.field{
+					margin-bottom: 0;
+					padding: 15px 0;
+					border-bottom: 1px #d7d7d7 solid;
+
+					&:first-child{
+						padding-top: 0;
+					}
+
+				}
+			}
+
+			label.title_label{
+				font-size: 16px;
+			    font-weight: 500;
+			    margin-bottom: 10px;
+			    line-height: 16px;
+			}
+
+			.ui.checkbox{
+				width: 100%;
+			}
+
+		}
+
+		&.hotel_list{ 
+
+			.title{
+				padding: 10px 15px; 
+				background: transparent;   
+				overflow: hidden;
+
+				h3{
+					text-align: left;   
+					float: left;
+
+					.ui.circular{
+						vertical-align: text-top;
+					}
+				}
+
+				span.showing{
+					font-size: 11px;
+					float: right;
+				}
+			}
+
+			.hotels.block{
+				width: 100%; 
+				border: 1px #e1e0e0 solid;  
+	    		float: left;
+	    		margin-right: 15px;
+	    		cursor: pointer;
+	    		margin-bottom: 15px; 
+	    		position: relative;
+				@include transition-effect();
+
+
+	    		.featured{
+	    			position: absolute;
+	    			top: 0;
+	    			right: 0;
+	    		}
+
+	    		&:hover, &:focus{
+	    			border: 1px #21ba45 solid;
+	    			outline: 0;  
+	    			background: rgba(33, 186, 76, 0.05);
+	    		}
+				
+				$img_width: 150px;
+
+				.img{
+					width: $img_width;
+					height: $img_width;
+					background: #eee; 
+					background-size: cover;
+	    			background-position: 50%;
+					float: left;
+					border-right: 1px #e1e0e0 solid;  
+
+
+	    			&.img1{
+						background-image: url('../../assets/images/properties1.jpg');
+	    			}
+
+	    			&.img3{
+						background-image: url('../../assets/images/properties3.jpg');
+	    			}
+ 
+				}
+				.body{
+					@include calc('width','100% - '+$img_width);
+					float: left;
+					padding: 15px;
+					height: 122px;
+
+					h3{
+						font-size: 17px;
+						margin-bottom: 0;
+
+					}
+
+					span.location{
+						margin-bottom: 10px;
+						display: block;
+						font-size: $font_size - 2;
+
+
+						i{
+							vertical-align: middle; 
+						}
+					}
+
+					p{
+						font-size: 12px;
+	    				line-height: 15px;
+					}
+				}
+
+				.services_offer{
+					padding: 3px 10px;
+					border-top: 1px #eee solid;
+					overflow: hidden;
+
+					ul{
+						padding-left: 0;
+						margin: 0;
+
+						li{
+							list-style: none;
+							display: inline-block;
+							padding: 0px 5px;
+
+							i{
+								font-size: $font_size + 2;
+							}
+						}
+					}
+				}
+			}	
+		}
+
+		&.adds_content { 
+			background: #eee; 
+
+		}
+	}
+	
+}
+

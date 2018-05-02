@@ -1,0 +1,42 @@
+@import '../assets/sass/main';
+
+$nav_width: 200px;
+
+.dashbaord{
+	padding: 0;
+	@include viewport();
+
+	.header{
+		height: 50px;
+		width: 100%;
+		background: #232a32;
+		position: fixed;
+		top: 0;
+	}
+
+	.content_wrapper{
+		width: 100%;
+		margin-top: 50px;
+		height: 100%;
+
+
+		.nav_content{
+			width: $nav_width;
+			background: rgba(41,51,61,0.95);
+			height: inherit;
+			position: fixed;
+		}
+
+		.right_content{
+			padding-left: $nav_width;
+			width: 100%;
+			height: inherit;
+
+			.right_content_inner{
+				padding: 30px;
+			}
+		}
+
+	}
+
+}

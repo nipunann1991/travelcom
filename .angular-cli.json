@@ -19,9 +19,22 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/slick-carousel/slick/slick.css",
+        "../node_modules/slick-carousel/slick/slick-theme.css", 
+        "./assets/css/camera.css",
+        "../node_modules/semantic-ui/dist/semantic.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+          "../node_modules/jquery/dist/jquery.min.js", 
+          "../node_modules/semantic-ui/dist/semantic.min.js",
+          "../node_modules/masonry-layout/dist/masonry.pkgd.min.js",
+          "../node_modules/slick-carousel/slick/slick.min.js", 
+          "./assets/js/camera.min.js", 
+          "./assets/js/jquery.easing.1.3.js",
+          "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

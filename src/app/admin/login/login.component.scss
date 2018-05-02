@@ -1,0 +1,27 @@
+@import '../../../assets/sass/main';
+
+.login{
+	@include viewport();
+
+	.inner{
+		@include flexbox();
+		@include viewport(inherit,inherit);
+		
+
+		.login_box{
+			width: 350px;
+			display: block;
+			margin: auto;
+			-webkit-box-shadow: 0 1px 2px 0 #b2b2b2;
+    		box-shadow: 0 1px 2px 0 #b2b2b2;
+    		padding: 30px;
+    		border-radius: 3px;
+
+    		form{
+    			button{
+    				width: 100%;
+    			}
+    		}
+		}
+	}
+}
