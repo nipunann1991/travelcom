@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'; 
-import { serverURL } from  "../../app.routes";
+import { serverURL } from  "../../app.global";
 import {Router} from "@angular/router";
 
 declare var jquery:any;
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
  		}
  	});
 
-    this.http.post('http://localhost:81/travelcom-api/index.php/LoginController/getLoginCredentials',params)
+    this.http.post(serverURL+'LoginController/getLoginCredentials',params)
     .subscribe(
         res => {
 

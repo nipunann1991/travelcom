@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router'; 
 import { AuthGuard } from './auth.guard';
+ 
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   
   isDashboard: boolean = false;
 
-   constructor(private router: Router, private authService: AuthGuard) { 
+   constructor(private router: Router , private authService: AuthGuard ) { 
 
    }
 
@@ -27,7 +28,9 @@ export class AppComponent {
        this.isDashboard = this.authService.isDashboard()
 
        if (this.authService.canActivate()) {
-          this.router.navigate(['dashboard']);
+          //this.router.navigate(['dashboard']);
       }
     }
 }
+
+

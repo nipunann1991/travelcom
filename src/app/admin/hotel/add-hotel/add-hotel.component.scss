@@ -1,0 +1,102 @@
+@import '../../../../assets/sass/main';
+
+
+.add_hotel{
+
+	.form_block{
+
+		&.mid{
+			margin-top: 30px;
+		}
+
+		h3{
+			font-size: $heading_font_size - 8;  
+			margin-bottom: 30px;
+		}
+
+		.hotel_img{
+			width: 250px;
+			height: 200px;
+			border: 1px #dadada solid;
+    		background-color: #eee;
+    		background-size: cover; 
+		} 
+	}
+}
+
+
+:host ::ng-deep file-drop{
+	.drop-zone{
+		border-radius: 0;
+		height: 100%;
+		border-color: #b5b5b5;
+
+		.content{
+			height: 100%;
+			font-weight: 500;
+   	 		font-size: 18px;
+   	 		color: #b5b5b5;
+		}
+	}
+}
+
+
+
+.nav-tabs{
+	border: 0;
+
+	.nav-link{
+		margin-right: 10px;
+		border-color: #575757;
+	    border-radius: 50px;
+	    background-color: transparent;
+	    color: #575757;
+ 
+
+		&.active, &:hover{
+			color: #ffffff;
+			background-color: $base_color;
+			border-radius: 50px;
+			border-color: $base_color;
+			
+		}
+
+		&:hover {
+		    border-color: $base_color;
+		    border-radius: 50px;
+		    background-color: transparent;
+		    color: $base_color;
+		}
+	}
+}
+ 
+.tab-pane{
+	padding: 25px;
+	border: 1px #e1e1e1 solid;
+    margin-top: 20px;
+
+
+}
+
+#service-provided{
+    	ul{
+    		padding-left: 0;
+    		overflow: hidden;
+
+    		li{
+				width: 25%;
+				float: left;
+				margin-bottom: 20px;
+
+				label{
+					cursor: pointer;
+				}
+
+				i{
+					margin: 0 5px;
+					font-size: $font_size + 5;
+					vertical-align: middle;
+				}
+    		}
+    	}
+    }

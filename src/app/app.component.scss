@@ -4,7 +4,7 @@ $nav_width: 200px;
 
 .dashbaord{
 	padding: 0;
-	@include viewport();
+	@include viewport(); 
 
 	.header{
 		height: 50px;
@@ -12,6 +12,7 @@ $nav_width: 200px;
 		background: #232a32;
 		position: fixed;
 		top: 0;
+		z-index: 100;
 	}
 
 	.content_wrapper{

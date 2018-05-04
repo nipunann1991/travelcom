@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,YAAY,CACX,OAAO,CAAE,CAAC,CAEV,eAAE,CACD,UAAU,CAAE,IAAI,CAEhB,iBAAC,CACA,OAAO,CAAE,KAAK,CACd,OAAO,CAAE,QAAQ,CACjB,KAAK,CAAE,IAAI,CACX,eAAe,CAAE,IAAI,CACrB,aAAa,CAAE,gCAAmC,CAElD,uBAAO,CACN,UAAU,CChBD,OAAO",
+"sources": ["nav.component.scss","../../../assets/sass/_variables.scss"],
+"names": [],
+"file": "nav.component.css"
+}

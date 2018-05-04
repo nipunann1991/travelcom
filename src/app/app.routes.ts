@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Routes, CanActivate} from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HotelComponent } from './hotel/hotel.component';
@@ -38,5 +39,4 @@ export const AppRoutes: Routes = [
     },
 ];
 
-
-export const serverURL : any = 'http://localhost:81/travelcom-api/index.php/';
+ 
