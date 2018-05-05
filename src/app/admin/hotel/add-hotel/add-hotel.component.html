@@ -1,10 +1,32 @@
- 
+<div class="header col-md-12">
+     <h2>Add Hotel</h2> 
+     <span class="breadcrumb_nav">Home > Add Hotel</span>
+</div>
 <div class="ui form add_hotel">
     <div class="form_block col-md-12">
         
         <div class="row">
-             <div class="col-md-3">
-                <div class="hotel_img">
+            
+            <div class="col-md-8">  
+                <div class="required field">
+                    <label>Property Type</label>
+                    <select class="ui search dropdown" (change)="setPropertyType($event.target.value)"> 
+                        <option *ngFor="let pt of property_type" value="{{pt.ptype_id}}">{{pt.ptype_name}}</option>
+                    </select>
+                </div>
+                 <div class="required field">
+                    <label>Hotel name</label>
+                    <input type="text"  [(ngModel)]="hotel_details.hotel_name" placeholder="Hotel Name" name="hotelname">
+                </div>
+                <div class="required field">
+                    <label>Description</label>
+                    <textarea rows="4" name="description" [(ngModel)]="hotel_details.hotel_desc"></textarea>
+                </div>
+                
+            </div>
+
+             <div class="col-md-4 ">
+                <div class="hotel_img ui segment">
                     
                     <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
@@ -13,16 +35,6 @@
 
 
                 </div> 
-            </div>
-            <div class="col-md-8">  
-                 <div class="required field">
-                    <label>Hotel name</label>
-                    <input type="text"  [(ngModel)]="hotel_details.hotel_name" placeholder="Hotel Name" name="hotelname">
-                </div>
-                <div class="required field">
-                    <label>Description</label>
-                    <textarea rows="3" name="description" [(ngModel)]="hotel_details.hotel_desc"></textarea>
-                </div>
             </div>
            
         </div>
@@ -102,7 +114,7 @@
                 <h3>Services Provided</h3>
                 <ul class="field">
                     <li class="ui checkbox"  *ngFor="let sl of service_list">
-                        <input class="form-check-input" type="checkbox" value="" id="{{sl.alias}}">
+                        <input class="form-check-input" type="checkbox" value="" id="{{sl.alias}}"  (change)="checkValue(isChecked?'A':'B', sl.alias )">
                         <label class="form-check-label" for="{{sl.alias}}">
                            <i class="{{sl.icon}}"></i> {{sl.name}} 
                         </label>

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BootstrapGrowlComponent, BootstrapGrowlModule } from 'ngx-bootstrap-growl';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from  "./app.routes";
@@ -7,8 +8,10 @@ import { AuthGuard } from './auth.guard';
 import { FormsModule } from '@angular/forms';
 
 // Import your library
+
 import { SlickModule } from 'ngx-slick'; 
 import { FileDropModule } from 'ngx-file-drop';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -34,13 +37,13 @@ import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.componen
     DashboardComponent,
     NavComponent,
     AddHotelComponent,
-    ViewHotelComponent,
+    ViewHotelComponent, 
 
   ],
   imports: [
    		RouterModule.forRoot(AppRoutes, { useHash: false }),
     	BrowserModule, FormsModule, HttpClientModule, 
-      SlickModule.forRoot(), FileDropModule
+      SlickModule.forRoot(), FileDropModule, BootstrapGrowlModule, DataTablesModule 
 
    
   ],

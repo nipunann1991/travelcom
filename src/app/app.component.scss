@@ -41,3 +41,10 @@ $nav_width: 200px;
 	}
 
 }
+
+
+:host ::ng-deep .alert-success{
+	position: fixed;
+    right: 20px;
+    top: 60px;
+}

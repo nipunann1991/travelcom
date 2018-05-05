@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
 		{
 			id: 2,
 			label: 'Hotel',
-			url: 'admin/hotel/add-hotel'
+			url: 'admin/hotel/view-hotel'
 		}
 	]
 

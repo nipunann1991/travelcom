@@ -6,6 +6,8 @@ import { SearchHotelComponent } from './search-hotel/search-hotel.component';
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component'; 
 import { AddHotelComponent } from './admin/hotel/add-hotel/add-hotel.component';
+import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.component';
+
 
 import { AuthGuard } from './auth.guard'; 
 
@@ -37,6 +39,14 @@ export const AppRoutes: Routes = [
       canActivate: [AuthGuard], 
       
     },
+
+    { path: 'admin/hotel/view-hotel', 
+      component: ViewHotelComponent,
+      canActivate: [AuthGuard], 
+      
+    },
+
+    
 ];
 
  

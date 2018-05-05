@@ -1,3 +1,32 @@
-<p>
-  view-hotel works!
-</p>
+<div class="header col-md-12">
+     <h2>View Hotels</h2> 
+     <span class="breadcrumb_nav">Home > View Hotels</span>
+     <div class="row_ btn_row">
+     	<button class="ui submit button green" routerLink="/admin/hotel/add-hotel" >Create New Hotel</button>
+
+     	<button class="ui submit button  right" routerLink="/admin/hotel/add-hotel" >Grid View</button>
+     </div>
+</div>
+ 
+<div class="body col-md-12">
+	 
+	 <table datatable [dtOptions]="dtOptions" class="row-border hover">
+	  <thead>
+	    <tr>
+	      <th>Hotel ID</th>
+	      <th>Hotel name</th>
+	      <th>City</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let h of Hotels">
+	      <td>{{ h.hotel_id }}</td>
+	      <td>{{ h.hotel_name }}</td>
+	      <td>{{ h.city }}</td>
+	    </tr>
+	   <!--  <tr *ngIf="Hotels?.length == 0">
+	      <td colspan="3" class="no-data-available">No data!</td>
+	    </tr> -->
+	  </tbody>
+	</table>
+</div>

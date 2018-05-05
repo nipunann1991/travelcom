@@ -15,11 +15,13 @@
 		}
 
 		.hotel_img{
-			width: 250px;
-			height: 200px;
-			border: 1px #dadada solid;
-    		background-color: #eee;
-    		background-size: cover; 
+			width: 330px;
+		    height: 280px;
+		    border: 0;
+		    background-color: #eee;
+		    background-size: cover;
+		    padding: 0;
+		    margin: auto;
 		} 
 	}
 }
@@ -51,13 +53,14 @@
 	    border-radius: 50px;
 	    background-color: transparent;
 	    color: #575757;
+	    font-weight: 500;
  
 
 		&.active, &:hover{
-			color: #ffffff;
-			background-color: $base_color;
-			border-radius: 50px;
-			border-color: $base_color;
+			 border-color: $base_color;
+		    border-radius: 50px;
+		    background-color: transparent;
+		    color: $base_color;
 			
 		}
 
@@ -73,9 +76,7 @@
 .tab-pane{
 	padding: 25px;
 	border: 1px #e1e1e1 solid;
-    margin-top: 20px;
-
-
+    margin-top: 20px; 
 }
 
 #service-provided{
