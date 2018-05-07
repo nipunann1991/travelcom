@@ -24,6 +24,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NavComponent } from './admin/nav/nav.component';
 import { AddHotelComponent } from './admin/hotel/add-hotel/add-hotel.component';
 import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.component';
+import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
+import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.componen
     DashboardComponent,
     NavComponent,
     AddHotelComponent,
-    ViewHotelComponent, 
+    ViewHotelComponent,
+    HoteldataComponent,
+    EditHotelComponent, 
 
   ],
   imports: [

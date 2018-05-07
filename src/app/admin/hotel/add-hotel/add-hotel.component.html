@@ -1,6 +1,11 @@
 <div class="header col-md-12">
-     <h2>Add Hotel</h2> 
-     <span class="breadcrumb_nav">Home > Add Hotel</span>
+    <h2>Add Hotel</h2> 
+    <span class="breadcrumb_nav">Home > Add Hotel</span>
+
+    <div class="row_ btn_row"> 
+        <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" >View Hotel List</button>
+     </div>
+
 </div>
 <div class="ui form add_hotel">
     <div class="form_block col-md-12">
@@ -53,6 +58,9 @@
             </li>
              <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#service-provided">Services Provided</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#cards-accepted">Cards Accepted</a>
             </li>
         </ul>
 
@@ -111,15 +119,32 @@
                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
             <div id="service-provided" class="tab-pane fade">
+
                 <h3>Services Provided</h3>
+
                 <ul class="field">
                     <li class="ui checkbox"  *ngFor="let sl of service_list">
-                        <input class="form-check-input" type="checkbox" value="" id="{{sl.alias}}"  (change)="checkValue(isChecked?'A':'B', sl.alias )">
+                        <input class="form-check-input" type="checkbox" value="" id="{{sl.alias}}"  (change)="checkValueServices( sl.alias )">
                         <label class="form-check-label" for="{{sl.alias}}">
                            <i class="{{sl.icon}}"></i> {{sl.name}} 
                         </label>
                     </li>
                 </ul>
+
+            </div>
+            <div id="cards-accepted" class="tab-pane fade">
+
+                <h3>Cards Accepted</h3>
+
+                <ul class="field">
+                    <li class="ui checkbox"  *ngFor="let cl of card_list">
+                        <input class="form-check-input" type="checkbox" value="" id="{{cl.alias}}"  (change)="checkValueCards( cl.alias )">
+                        <label class="form-check-label" for="{{cl.alias}}">
+                           <i class="{{cl.icon}}"></i> {{cl.card_type}} 
+                        </label>
+                    </li>
+                </ul>
+
             </div>
         </div>
  

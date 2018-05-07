@@ -1,9 +1,9 @@
-@import '../../assets/sass/main';
+@import '../../../../assets/sass/main';
 
 .view_hotel{
 
 	.left_content.hotel{
-		padding: 50px 0;
+		padding: 0 0 50px 0;
 
 		.hotel_main_details{ 
 			overflow: hidden; 
@@ -14,7 +14,7 @@
 				background: #eee;
 				float: left;
 				float: left;
-			    background-image: url(../../assets/images/properties1.jpg);
+			    //background-image: url(../../assets/images/properties1.jpg);
 			    background-size: cover;
 			    border: 1px #d1d1d1 solid;
 			    border-radius: 4px;
@@ -191,13 +191,4 @@
 		}
 	}
 
-}
-
-
-:host ::ng-deep  app-hoteldata{
-
-	.header{
-		display: none;
-	}
-	 
 }

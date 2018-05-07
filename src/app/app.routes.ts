@@ -7,6 +7,8 @@ import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component'; 
 import { AddHotelComponent } from './admin/hotel/add-hotel/add-hotel.component';
 import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.component';
+import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
+import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
 
 
 import { AuthGuard } from './auth.guard'; 
@@ -45,6 +47,18 @@ export const AppRoutes: Routes = [
       canActivate: [AuthGuard], 
       
     },
+
+    { path: 'admin/hotel/view-hotel/:id', 
+      component: HoteldataComponent, 
+      canActivate: [AuthGuard], 
+    },
+
+    { path: 'admin/hotel/edit-hotel/:id', 
+      component: EditHotelComponent, 
+      canActivate: [AuthGuard], 
+    },
+
+
 
     
 ];

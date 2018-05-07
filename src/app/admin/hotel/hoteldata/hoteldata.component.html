@@ -1,0 +1,114 @@
+<div class="header col-md-12">
+     <h2>View Hotel - #{{hotelID}}</h2> 
+     <span class="breadcrumb_nav">Home > View Hotel</span>
+     <div class="row_ btn_row">
+     	<button class="ui submit button green" routerLink="/admin/hotel/add-hotel" >Create New Hotel</button>
+
+     	<button class="ui submit button  right" routerLink="/admin/hotel/view-hotel" >Hotels List</button>
+     </div>
+</div>
+ 
+<section class="body col-md-12 view_hotel">
+ 
+	<div class="hotel left_content">
+		
+		<div class="hotel_main_details">
+			<div class="main_img hotel_img">
+				
+			</div>
+			<div class="hotel_details">
+				<h2 class="title">{{hotel_details.hotel_name}} - {{hotel_details.city}}</h2>
+
+				<div class="hotel_contact_details">
+					<ul>
+						<li class="location">
+							<i class="icon-location"></i>{{hotel_details.address}}
+						</li>
+						<li class="phone">
+							<i class="icon-phone"></i>{{hotel_details.tel}} </li>
+						<li>
+							<i class="icon-envelope"></i>
+							{{hotel_details.email}} 
+						</li>
+						<li>
+							<i class="icon-world"></i>
+							{{hotel_details.website}} 
+						</li>
+					</ul>
+			 
+				</div> 
+
+				<div class="desc"> 
+					<h3>About Hotel</h3>
+					<p>{{hotel_details.hotel_desc}}</p>
+					 
+				</div>
+
+				
+			</div>
+
+		</div>
+
+
+		<div class="hotel_sub_details">
+
+			<ul class="nav nav-tabs" id="hotelDetail" role="tablist">
+		  		<li class="nav-item">
+		    		<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Hotel Facilities</a>
+		  		</li>
+		  		<li class="nav-item">
+		    		<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Gallery</a>
+		  		</li> 
+			</ul>
+
+			<div class="tab-content" id="myTabContent">
+		  		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+		  			<div class="block sub">
+						<h3> 
+							<i class="icon-sleeping-bed"></i> Room Types
+						</h3>
+
+						<ul>
+							<li>Superior Queen Room</li>
+							<li>Triple Room</li>
+							<li>Deluxe Double Room Garden View</li>
+							<li>Deluxe Room with Balcony</li>
+						</ul>
+					</div>
+					<div class="block sub services">
+						<h3><i class="icon-serving-lunch"></i> Services</h3> 
+						<ul>
+							<li *ngFor="let sl of service_list" [ngClass]="{'disabled': !sl.isActive}">
+								<i class="{{sl.icon}}"></i> {{sl.name}}
+							</li> 
+							
+						</ul>
+					</div>
+					<div class="block sub payment">
+						<h3><i class="icon-visa-logo"></i> Cards Accepted</h3> 
+						<ul>
+							<li *ngFor="let cl of card_list" [ngClass]="{'disabled': !cl.isActive}">
+								<i class="{{cl.icon}}"></i> {{cl.card_type}}
+							</li> 
+						</ul>
+					</div>
+
+		  		</div>
+		 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">	
+
+		 		 	<div class="camera_wrap">
+					    <div data-src="../../assets/images/properties4.jpg"  data-thumb="../../assets/images/properties4.jpg" ></div>
+					    <div data-src="../../assets/images/properties2.jpg"  data-thumb="../../assets/images/properties2.jpg"></div>
+					    <div data-src="../../assets/images/properties3.jpg"  data-thumb="../../assets/images/properties3.jpg"></div>
+					</div>
+
+		 		</div> 
+			</div>  
+		</div>
+
+	</div>
+			
+	
+</section>
+ 

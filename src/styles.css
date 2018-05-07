@@ -11,6 +11,19 @@
 /*
    src/styles.css (i.e. your global style)
 */
-.dataTables_empty {
-  display: none;
+ 
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    border: 1px #c6c6c6 solid;
+    border-radius: 3px;
+}
+
+.dataTables_wrapper .dataTables_info{
+	font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+	line-height: 15px;
+    padding: 5px;
 }

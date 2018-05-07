@@ -16,6 +16,7 @@
 	      <th>Hotel ID</th>
 	      <th>Hotel name</th>
 	      <th>City</th>
+	      <th> </th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -23,7 +24,14 @@
 	      <td>{{ h.hotel_id }}</td>
 	      <td>{{ h.hotel_name }}</td>
 	      <td>{{ h.city }}</td>
+	      <td>
+	      	<a routerLink="/admin/hotel/view-hotel/{{ h.hotel_id }}" >View</a>
+	      	<a routerLink="/admin/hotel/edit-hotel/{{ h.hotel_id }}" >Edit</a>
+
+	      </td>
 	    </tr>
+
+	    
 	   <!--  <tr *ngIf="Hotels?.length == 0">
 	      <td colspan="3" class="no-data-available">No data!</td>
 	    </tr> -->

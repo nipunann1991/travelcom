@@ -24,8 +24,8 @@ export class AddHotelComponent implements OnInit {
 
 	public files: UploadFile[] = [];
 
-	province : any; property_type : any; service_list : any; fileToUpload: File = null;
-	isChecked: boolean = false;
+	province : any; property_type : any; service_list : any; card_list : any; fileToUpload: File = null;
+	isCheckedServices: boolean = false; isCheckedCards: boolean = false;
 
 	hotel_details : any = {
 		 ptype_id: '',
@@ -43,7 +43,7 @@ export class AddHotelComponent implements OnInit {
 
 	};
 
-	facilities : any = {};
+	facilities : any = {}; selected_card_list : any = {}; 
 	
 
 
@@ -56,6 +56,7 @@ export class AddHotelComponent implements OnInit {
   	this.getProvince();
   	this.getServiceList();
   	this.getPropertyType();
+  	this.getCardList();
  	
   }
 
@@ -85,7 +86,6 @@ export class AddHotelComponent implements OnInit {
 	 			this.property_type = res; 
 	 			this.property_type = this.property_type.data
 
-	 			console.log(this.property_type[0].ptype_id)	 
 	 			 
 	 			this.hotel_details.ptype_id = this.property_type[0].ptype_id;
 	 		 
@@ -105,8 +105,7 @@ export class AddHotelComponent implements OnInit {
 	    this.hotel_details.ptype_id = val;
 	}
 
-	checkValue(event: any, alias: any){
-	    console.log(event,alias);
+	checkValueServices(alias: any){ 
 
 	    let status = this.facilities[alias];
 
@@ -116,9 +115,22 @@ export class AddHotelComponent implements OnInit {
 	    	this.facilities[alias] = 0 
 	    }
 
-	    console.log(this.facilities);
-	      
+	    console.log(this.facilities); 
 
+	}
+
+
+	checkValueCards(alias: any){
+	     
+	    let status = this.selected_card_list[alias];
+
+	    if (status == 0) {
+	    	this.selected_card_list[alias] = 1
+	    }else{
+	    	this.selected_card_list[alias] = 0 
+	    }
+
+	    console.log(this.selected_card_list); 
 
 	}
 
@@ -149,9 +161,7 @@ export class AddHotelComponent implements OnInit {
 	         			const params1 = new HttpParams({
 					 		fromObject : this.facilities
 					 	});
-	         			
-	         			console.log(this.facilities)
-
+	         			 
 	         			this.http.post(serverURL+'/HotelController/addFacilities',params1)
 				      	.toPromise()
 				      	.then(
@@ -174,16 +184,48 @@ export class AddHotelComponent implements OnInit {
 				         		 
 				          		resolve();
 				        	}
-				      );
+				    ); 
+
+         			alert('added successfully');  
+
+         			this.selected_card_list['hotel_id'] = response.data.inserted_id
+
+         			const params2 = new HttpParams({
+				 		fromObject : this.selected_card_list
+				 	});
+         			 
+         			this.http.post(serverURL+'/HotelController/addCardsAccepted',params2)
+			      	.toPromise()
+			      	.then(
+			        	res => { 
+			        		 
+			         		let response : any  = res;
+
+			         		console.log(response);
+
+			         		if (response.status == 200 ) {   
+
+			         			this.bootstrapGrowlService.addAlert("Added accepetd cards successfully", BootstrapAlertType.SUCCESS);
+
+			         		}else{
+			         			 
+			         		}
+
+			         		 
+			          		resolve();
+			        	}
+				    );
+
+
+
 
 	         		}else{
 	         			// error msg code...
 	         		}
 
-	         		// if (condition) {
-	         		// 	// code...
-	         		// }
-	         		// ; 
+
+
+ 
 	          		resolve();
 	        	}
 	      );
@@ -208,8 +250,7 @@ export class AddHotelComponent implements OnInit {
 	 				  	let key = this.service_list[i].alias;
 	 				
 	 					this.facilities[key] = 0; 
-	 			}
-	 			
+	 			} 
 
 	 			console.log(this.facilities)
 	 		 
@@ -220,6 +261,31 @@ export class AddHotelComponent implements OnInit {
 	    );
 
 	}
+
+	getCardList()  : any { 
+
+	  	this.http.get(serverURL+'/HotelController/getHotelCardsAcceptedList')
+	    .subscribe(
+	        res => { 
+	 			this.card_list = res; 
+	 			this.card_list = this.card_list.data 
+
+	 			for (var i = 0; i < this.card_list.length; i++) {
+
+	 				  	let key = this.card_list[i].alias;
+
+	 				  	this.selected_card_list[key] = 0;
+ 
+	 			} 
+	 		 
+	        },
+	        err => {
+	          console.log(err);
+	        }
+	    );
+
+	}
+
 
 
   	 
@@ -257,16 +323,7 @@ export class AddHotelComponent implements OnInit {
 	             	$('file-drop .content .loader').remove()
 	          	})
  
-	          /**
-	          // You could upload it like this:
-	          const formData = new FormData()
-	          formData.append('logo', file, relativePath)
-	 
-	          // Headers
 	         
-	 
-	          
-	          **/
 	 
 	        });
 	      } else {
