@@ -1,3 +1,158 @@
-<p>
-  edit-hotel works!
-</p>
+<div class="header col-md-12">
+    <h2>Edit Hotel</h2> 
+    <span class="breadcrumb_nav">Edit > Add Hotel</span>
+
+    <div class="row_ btn_row"> 
+        <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" >View Hotel List</button>
+     </div>
+
+</div>
+<div class="ui form add_hotel">
+    <div class="form_block col-md-12">
+        
+        <div class="row">
+            
+            <div class="col-md-8">  
+                <div class="required field">
+                    <label>Property Type</label>
+                    <select class="ui search dropdown" (change)="setPropertyType($event.target.value)"> 
+                        <option *ngFor="let pt of property_type" value="{{pt.ptype_id}}" [selected]="pt.ptype_id == hotel_details.ptype_id">{{pt.ptype_name}}</option>
+                    </select>
+                </div>
+                 <div class="required field">
+                    <label>Hotel name</label>
+                    <input type="text"  [(ngModel)]="hotel_details.hotel_name" placeholder="Hotel Name" name="hotelname">
+                </div>
+                <div class="required field">
+                    <label>Description</label>
+                    <textarea rows="4" name="description" [(ngModel)]="hotel_details.hotel_desc"></textarea>
+                </div>
+                
+            </div>
+
+             <div class="col-md-4 ">
+                <div class="hotel_img ui segment">
+                    
+                    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
+                      
+                    </file-drop>
+
+
+                </div> 
+            </div>
+           
+        </div>
+       
+        <div class="clearfix"></div>
+    </div>
+    <div class="form_block mid col-md-12">
+
+          <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active"  data-toggle="tab" href="#contact-details">Contact Details</a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link" data-toggle="tab" href="#room-type">Room Types</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#service-provided">Services Provided</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#cards-accepted">Cards Accepted</a>
+            </li>
+        </ul>
+
+  
+        <div class="tab-content">
+            <div id="contact-details" class="tab-pane active">
+                <h3>Hotel Contact Details</h3>
+                
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="required field">
+                            <label>Address 1</label>
+                            <input type="text" placeholder="Address 1" name="address1" [(ngModel)]="hotel_details.address1" >
+                        </div>
+                        <div class="field">
+                            <label>Address 2</label>
+                            <input type="text" placeholder="Address 2" [(ngModel)]="hotel_details.address2" >
+                        </div>
+                        <div class="required field">
+                            <label>City</label>
+                            <input type="text" name="city" placeholder="City" [(ngModel)]="hotel_details.city">
+                        </div>
+                        
+                        <div class="ui form">
+                            <div class="required field">
+                                <label>Province</label>
+                                <select class="ui search dropdown" (change)="setProvince($event.target.value)"> 
+                                    <option *ngFor="let p of province" value="{{p.province_id}}" [selected]="p.province_id == hotel_details.province">{{p.province_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5  offset-md-1">
+                        <div class="required field">
+                            <label>Telephone No 1</label>
+                            <input type="text" name="tel1" placeholder="Telephone No 1" [(ngModel)]="hotel_details.tel1" >
+                        </div>
+
+                        <div class="field">
+                            <label>Telephone No 2</label>
+                            <input type="text" placeholder="Telephone No 2" [(ngModel)]="hotel_details.tel2" >
+                        </div>
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="Email Address" [(ngModel)]="hotel_details.email" >
+                        </div>
+                        <div class="field">
+                            <label>Website</label>
+                            <input type="email" placeholder="Website" [(ngModel)]="hotel_details.website" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="room-type" class="tab-pane fade"><br>
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div id="service-provided" class="tab-pane fade">
+
+                <h3>Services Provided</h3>
+
+                <ul class="field">
+                    <li class="ui checkbox"  *ngFor="let sl of service_list">
+                        <input class="form-check-input" type="checkbox" value="" id="{{sl.alias}}" [checked]="sl.isActive" (change)="checkValueServices( sl.alias )">
+                        <label class="form-check-label" for="{{sl.alias}}">
+                           <i class="{{sl.icon}}"></i> {{sl.name}} 
+                        </label>
+                    </li>
+                </ul>
+
+            </div>
+            <div id="cards-accepted" class="tab-pane fade">
+
+                <h3>Cards Accepted</h3>
+
+                <ul class="field">
+                    <li class="ui checkbox" *ngFor="let cl of card_list">
+                        <input class="form-check-input" type="checkbox" value="" id="{{cl.alias}}"  (change)="checkValueCards( cl.alias )" [checked]="cl.isActive">
+                        <label class="form-check-label" for="{{cl.alias}}">
+                           <i class="{{cl.icon}}"></i> {{cl.card_type}} 
+                        </label>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+ 
+    </div>
+    
+   <div class="form_block mid col-md-12">
+       <button class="ui submit button green" (click)="submitForm()">Edit Hotel</button>
+   </div>
+    
+</div> 
+
