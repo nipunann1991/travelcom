@@ -43,7 +43,7 @@ export class AddHotelComponent implements OnInit {
 
 	};
 
-	facilities : any = {}; selected_card_list : any = {}; 
+	facilities : any = {}; selected_card_list : any = {}; room_type : any = []; room_type_txt : any;
 	
 
 
@@ -58,8 +58,25 @@ export class AddHotelComponent implements OnInit {
   	this.getPropertyType();
   	this.getCardList();
  	
+
+
   }
 
+
+  addRoomTypes(): any {
+
+  	let x =  { 'rt_name': this.room_type_txt }
+  	this.room_type.push(x);
+
+  	this.room_type_txt = '';
+
+  	console.log(this.room_type)
+
+  }
+
+  removeIndex(i){ 
+  	this.room_type.splice(i, 1);
+  }
 
 
   getProvince() : any {
@@ -216,6 +233,43 @@ export class AddHotelComponent implements OnInit {
 			        	}
 				    );
 
+				    if (this.room_type.length > 0) {
+
+				    	for (var i =0; i < this.room_type.length; i++) {
+				    		this.room_type[i]['hotel_id'] = response.data.inserted_id;
+
+
+				    			const params3 = new HttpParams({
+							 		fromObject : this.room_type[i]
+							 	});
+			         			 
+			         			this.http.post(serverURL+'/HotelController/addRoomType',params3)
+						      	.toPromise()
+						      	.then(
+						        	res => { 
+						        		 
+						         		let response : any  = res;
+
+						         		console.log(response);
+
+						         		if (response.status == 200 ) {   
+
+						         			//this.bootstrapGrowlService.addAlert("Added accepetd cards successfully", BootstrapAlertType.SUCCESS);
+
+						         		}else{
+						         			 
+						         		}
+
+						         		 
+						          		resolve();
+						        	}
+							    );
+				    	}
+				    	// code...
+
+				    	console.log(this.room_type);
+				    }
+
 
 
 
@@ -224,7 +278,7 @@ export class AddHotelComponent implements OnInit {
 	         		}
 
 
-
+	         		this.router.navigate(['/admin/hotel/view-hotel/'+response.data.inserted_id])
  
 	          		resolve();
 	        	}
@@ -349,6 +403,7 @@ export class AddHotelComponent implements OnInit {
 
    		let self = this;
    		
+   		//self.addHotel();
 
 	  	$('.ui.form')
 		  .form({

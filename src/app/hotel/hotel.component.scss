@@ -6,7 +6,7 @@
 		padding: 50px 0;
 
 		.hotel_main_details{ 
-			overflow: hidden; 
+			overflow: hidden;  
 
 			.main_img{
 				width: $hotel_img_width;
@@ -24,6 +24,7 @@
 				float: left;
 				@include calc('width', '100% -  '+$hotel_img_width);
 				padding: 0 30px;
+				
 
 
 				h2{
@@ -179,14 +180,16 @@
 
 	}
 
-	.adds_content {  
-		background: #f9f9f9;
+	.adds_content {   
+		background: #efeded;
    	 	border: 1px #eee solid;
 
 		h3{
-			text-align: center;
-			padding: 20px 0;
-			font-size: $heading_font_size - 5;  
+			text-align: center;  
+			padding: 15px 0;
+		    font-size: $heading_font_size - 7;  
+		    background: #d8d8d8;
+		    margin: 0 -15px;
 
 		}
 	}

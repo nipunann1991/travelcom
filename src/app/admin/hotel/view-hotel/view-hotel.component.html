@@ -2,31 +2,42 @@
      <h2>View Hotels</h2> 
      <span class="breadcrumb_nav">Home > View Hotels</span>
      <div class="row_ btn_row">
-     	<button class="ui submit button green" routerLink="/admin/hotel/add-hotel" >Create New Hotel</button>
-
-     	<button class="ui submit button  right" routerLink="/admin/hotel/add-hotel" >Grid View</button>
+     	<button class="ui submit button green" routerLink="/admin/hotel/add-hotel" >
+     		<i class="icon-add-button"></i> 
+     		Create New Hotel
+     	</button> 
+     	<button class="ui submit button  right" routerLink="/admin/hotel" >
+     		<i class="icon-grid"></i>
+     		Grid View
+     	</button>
      </div>
 </div>
  
 <div class="body col-md-12">
 	 
-	 <table datatable [dtOptions]="dtOptions" class="row-border hover">
+	 <table datatable [dtOptions]="dtOptions" class="row-border hover" [ngClass]="{'data_exist': isDataTable }">
 	  <thead>
 	    <tr>
 	      <th>Hotel ID</th>
 	      <th>Hotel name</th>
 	      <th>City</th>
+	      <th>Telephone</th>
 	      <th> </th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr *ngFor="let h of Hotels">
-	      <td>{{ h.hotel_id }}</td>
+	      <td><span class="dot {{ h.status_class }}"></span> {{ h.hotel_id }}</td>
 	      <td>{{ h.hotel_name }}</td>
 	      <td>{{ h.city }}</td>
+	      <td>{{ h.tel1 }}</td>
 	      <td>
-	      	<a routerLink="/admin/hotel/view-hotel/{{ h.hotel_id }}" >View</a>
-	      	<a routerLink="/admin/hotel/edit-hotel/{{ h.hotel_id }}" >Edit</a>
+	      	<a routerLink="/admin/hotel/view-hotel/{{ h.hotel_id }}" > 
+	      		<i class="icon-eye eye"></i>
+	      	</a>
+	      	<a routerLink="/admin/hotel/edit-hotel/{{ h.hotel_id }}" >
+				<i class="icon-pencil-edit-button"></i>
+	      	</a>
 
 	      </td>
 	    </tr>

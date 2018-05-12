@@ -1,2 +1,19 @@
 @import '../../../../assets/sass/main';
 
+
+.dot{
+	width: 10px;
+    height: 10px;
+    background: #f0f0f0;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+
+    &.published{ 
+		background: #21ba45; 
+    }
+
+    &.unpublished{
+		background: #ff0000;
+    }
+}

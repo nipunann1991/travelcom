@@ -3,7 +3,12 @@
     <span class="breadcrumb_nav">Edit > Add Hotel</span>
 
     <div class="row_ btn_row"> 
-        <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" >View Hotel List</button>
+ 
+        <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" ><i class="icon-list"></i> View Hotel List</button>
+        
+        <button class="ui submit button  yellow" (click)="viewHotel()" ><i class="icon-eye eye"></i>View Hotel</button>
+        
+        <button class="ui submit primary button  right" (click)="addGallery()" ><i class="icon-frame-landscape"></i> Add Gallery Images</button>
      </div>
 
 </div>
@@ -36,8 +41,7 @@
                     <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
                       
-                    </file-drop>
-
+                    </file-drop> 
 
                 </div> 
             </div>
@@ -115,8 +119,24 @@
                 </div>
             </div>
             <div id="room-type" class="tab-pane fade"><br>
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="row">
+                    <div class="field col-md-4"> 
+                        <h3>Room Types</h3>
+                        <div class="ui action input "> 
+                            <input type="text" placeholder="Search"  [(ngModel)]="room_type_txt"/>
+                            <button class="ui button add_btn" (click)="addRoomTypes()">Add</button>
+                        </div>
+                    </div>
+
+                    <ul class="col-md-4 offset-md-1">
+                        
+                        <li *ngFor="let rt of room_type; let i = index" >
+                            {{rt.rt_name}}
+
+                            <span (click)="removeIndex(i)" class="remove">Remove</span>
+                        </li>
+                    </ul>
+                </div> 
             </div>
             <div id="service-provided" class="tab-pane fade">
 

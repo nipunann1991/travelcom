@@ -27,3 +27,43 @@
 	line-height: 15px;
     padding: 5px;
 }
+
+.dataTables_wrapper  a{
+	text-decoration: none;	
+	color: #5a5a5a;
+}
+.dataTables_wrapper  i{
+	margin-right: 5px;	
+}
+
+.dataTables_wrapper  i.eye{
+    font-size: 18px;
+    position: relative;
+    top: 2px;
+}
+
+table.data_exist .dataTables_empty{
+  display: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    line-height: 10px;
+    padding: 5px;
+    font-size: 12px;
+}
+
+body{
+  background: #f9f9f9;
+}
+
+.padding0{
+  padding: 0;
+}
+
+.container{
+  max-width: 90%;
+}
+
+.hide{
+  display: none !important;
+}

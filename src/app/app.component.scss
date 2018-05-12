@@ -1,10 +1,15 @@
 @import '../assets/sass/main';
 
-$nav_width: 200px;
+$nav_width: 100px;
 
 .dashbaord{
 	padding: 0;
 	@include viewport(); 
+
+	.ui.active.dimmer{
+		position: fixed;
+    	z-index: 99;
+	}
 
 	.header{
 		height: 50px;
@@ -18,23 +23,27 @@ $nav_width: 200px;
 	.content_wrapper{
 		width: 100%;
 		margin-top: 50px;
-		height: 100%;
+		min-height: 100%;
+		background: #f7f7f7;
 
 
 		.nav_content{
 			width: $nav_width;
 			background: rgba(41,51,61,0.95);
-			height: inherit;
+			height: 100%;
 			position: fixed;
+			z-index: 100;
 		}
 
 		.right_content{
 			padding-left: $nav_width;
 			width: 100%;
-			height: inherit;
+			height: inherit; 
 
 			.right_content_inner{
 				padding: 30px;
+
+				
 			}
 		}
 
@@ -44,7 +53,13 @@ $nav_width: 200px;
 
 
 :host ::ng-deep .alert-success{
-	position: fixed;
+	position: fixed; 
     right: 20px;
     top: 60px;
+}
+
+:host ::ng-deep .body{
+	padding: 30px;
+	background: #fff;
+	box-shadow: 0px 1px 2px 0 rgba(178, 178, 178, 0.4);
 }

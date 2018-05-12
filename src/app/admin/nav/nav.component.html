@@ -1,5 +1,8 @@
 <ul class="nav-links">
 	<li *ngFor="let nav of navLinks">
-		<a routerLink="/{{nav.url}}">{{nav.label}}</a>
+		<a routerLink="/{{nav.url}}"> 
+			<i class="{{nav.icon}}"></i> 
+			<span>{{nav.label}}</span>
+		</a>
 	</li>
 </ul>

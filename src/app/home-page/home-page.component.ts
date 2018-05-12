@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
 	hotel : any = [];
 	dataLoaded : boolean = true;
  
-  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4,  'dots': true};
+  slideConfig = {"slidesToShow": 5, "slidesToScroll": 5,  'dots': true};
  
 
 slides : any = [
@@ -87,6 +87,33 @@ slides : any = [
 		featured: true,
 
 	}, 
+	{
+		id: '18753',
+		hotel_name: 'Comfort Inn & Hostel',
+		location: 'Nuwaraeliya',
+		desc: 'The 5-star Pan Pacific Singapore provides direct access to Marina Square Mall and Suntec Convention Centre.',
+		image: './assets/images/properties2.jpg',
+		featured: true,
+
+	}, {
+		id: '18753',
+		hotel_name: 'Pan Pacific Colombo',
+		location: 'Colombo',
+		desc: 'The 5-star Pan Pacific Singapore provides direct access to Marina Square Mall and Suntec Convention Centre.',
+		image: '../../assets/images/properties1.jpg',
+		featured: false,
+
+	},
+
+	{
+		id: '18753',
+		hotel_name: 'Comfort Inn & Hostel',
+		location: 'Nuwaraeliya',
+		desc: 'The 5-star Pan Pacific Singapore provides direct access to Marina Square Mall and Suntec Convention Centre.',
+		image: '',
+		featured: true,
+
+	},
 
 	]
 

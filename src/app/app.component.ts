@@ -10,7 +10,7 @@ import { AuthGuard } from './auth.guard';
 })
 export class AppComponent {
   
-  isDashboard: boolean = false;
+  isDashboard: boolean = false; isLoaded: boolean;
 
    constructor(private router: Router , private authService: AuthGuard ) { 
 
@@ -26,6 +26,7 @@ export class AppComponent {
 
 
        this.isDashboard = this.authService.isDashboard()
+       this.isLoaded =  this.authService.isLoaded;
 
        if (this.authService.canActivate()) {
           //this.router.navigate(['dashboard']);

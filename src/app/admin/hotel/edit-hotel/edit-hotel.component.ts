@@ -91,9 +91,13 @@ export class EditHotelComponent implements OnInit {
 	    .subscribe(
 	        res => { 
 	 			this.hotel_details = res; 
-	 			this.hotel_details = this.hotel_details.data[0] 
+	 			this.hotel_details = this.hotel_details.data[0];
 
-	 			console.log(this.hotel_details)
+	 			if (this.hotel_details.image_url != null) {
+	 				$('.hotel_img').attr('style','background-image: url('+this.hotel_details.image_url+')');
+	 			}
+
+	 			
 	 		 
 	        },
 	        err => {
@@ -104,6 +108,11 @@ export class EditHotelComponent implements OnInit {
 	}
 
 
+	viewHotel(){
+  		this.router.navigate(['/admin/hotel/view-hotel/'+this.hotelID]);
+	}
+
+
 	getPropertyType(){
 
 		this.http.get(serverURL+'/HotelController/getPropertyType')
@@ -111,8 +120,7 @@ export class EditHotelComponent implements OnInit {
 	        res => { 
 	 			this.property_type = res; 
 	 			this.property_type = this.property_type.data
-
-	 			 
+ 
 	 			this.hotel_details.ptype_id = this.property_type[0].ptype_id;
 	 		 
 	        },
@@ -184,7 +192,7 @@ export class EditHotelComponent implements OnInit {
 
 
 
-	         			alert('added successfully');  
+	         			//alert('added successfully');  
 
 	         			const params1 = new HttpParams({
 					 		fromObject : this.facilities
@@ -201,10 +209,8 @@ export class EditHotelComponent implements OnInit {
 
 				         		console.log(response);
 
-				         		if (response.status == 200 ) { 
-
-				         			alert('');   
-
+				         		if (response.status == 200 ) {   
+				         			
 				         			this.bootstrapGrowlService.addAlert("Added facilities successfully", BootstrapAlertType.SUCCESS);
 
 				         		}else{
@@ -443,7 +449,9 @@ export class EditHotelComponent implements OnInit {
 	}
 
 
-
+	addGallery(){
+		this.router.navigate(['/admin/hotel/add-gallery/'+this.hotelID]);
+	}
   	 
 	public dropped(event: UploadEvent) {
 	    this.files = event.files; 

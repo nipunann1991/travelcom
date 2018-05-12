@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { SlickModule } from 'ngx-slick'; 
 import { FileDropModule } from 'ngx-file-drop';
 import { DataTablesModule } from 'angular-datatables';
+import { NgMasonryGridModule } from 'ng-masonry-grid';
+
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -26,6 +28,7 @@ import { AddHotelComponent } from './admin/hotel/add-hotel/add-hotel.component';
 import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.component';
 import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
 import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
+import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +44,14 @@ import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.componen
     AddHotelComponent,
     ViewHotelComponent,
     HoteldataComponent,
-    EditHotelComponent, 
+    EditHotelComponent,
+    ImageGalleryComponent, 
 
   ],
   imports: [
    		RouterModule.forRoot(AppRoutes, { useHash: false }),
     	BrowserModule, FormsModule, HttpClientModule, 
-      SlickModule.forRoot(), FileDropModule, BootstrapGrowlModule, DataTablesModule 
+      SlickModule.forRoot(), FileDropModule, BootstrapGrowlModule, DataTablesModule, NgMasonryGridModule 
 
    
   ],

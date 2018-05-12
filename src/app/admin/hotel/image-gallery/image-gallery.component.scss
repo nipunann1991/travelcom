@@ -1,0 +1,77 @@
+@import '../../../../assets/sass/main';
+
+.hotel_img{
+	width: 330px;
+    height: 280px;
+    border: 0;
+    background-color: #eee;
+    background-size: cover;
+    padding: 0; 
+    float: left;
+} 
+
+
+:host ::ng-deep file-drop{
+	.drop-zone{
+		border-radius: 0;
+		height: 100%;
+		border-color: #b5b5b5;
+
+		.content{
+			height: 100%;
+			font-weight: 500;
+   	 		font-size: 18px;
+   	 		color: #b5b5b5;
+		}
+	}
+
+
+}
+
+
+.thumb_list{
+	float: left;
+
+	ul{
+		li{
+			display: flex;
+			align-items: center;
+
+			span.g_img{
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background: #eee;
+				vertical-align: middle;
+				background-size: cover;
+			}
+			
+			margin-bottom: 10px;
+
+			span.details{
+				padding: 0 15px;
+
+				span.title{ 
+					display: block;
+				}
+
+				span.img_url{
+					display: block;
+					font-size: 10px;
+				}
+			}
+
+		}
+	}
+
+	.deleteImage{
+		 
+		 i{
+		 	&:hover{
+		 		color: #d1d1d1;
+		 		cursor: pointer;
+		 	}
+		 }
+	}
+}
+

@@ -1,0 +1,46 @@
+<div class="header col-md-12">
+    <h2>Add/ Remove Gallery</h2> 
+    <span class="breadcrumb_nav">Edit > Add/ Remove Gallery</span>
+
+    <div class="row_ btn_row"> 
+        <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" >View Hotel List</button>
+        <button class="ui submit button  right" (click)="addGallery()" ><i class="icon-frame-landscape"></i> Add Gallery Images</button>
+     </div>
+
+</div>
+
+<div class="row">
+	<div class="hotel_img_wrapper col-md-12">
+	    <div class="hotel_img ui segment">
+	        
+	        <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+	        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
+	          
+	        </file-drop> 
+
+	    </div> 
+	    <div class="thumb_list">
+	    	<ul>
+				<li *ngFor="let gi of galleryImages ; let i = index;">
+					<span [ngStyle]="{'background-image':   'url(' + gi.image_url + ')' }"  class="g_img"></span>
+
+					<span class="details">
+						<span class="title">
+							Gallery Image {{i + 1}} 
+						</span>
+						<span class="img_url">
+							{{gi.image_url}}
+						</span>
+					</span>
+					<span class="deleteImage" (click)="deleteItem(i)">
+						<i class="icon-rubbish-bin"></i>
+					</span>
+					
+				</li>
+			</ul>
+	    </div>
+	    
+	</div>
+
+	 
+</div>

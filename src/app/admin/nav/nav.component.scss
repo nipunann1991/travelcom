@@ -9,10 +9,23 @@ ul.nav-links{
 
 		a{
 			display: block;
-			padding: 8px 20px;
+			padding: 15px 10px;
 			color: #fff;
 			text-decoration: none;
 			border-bottom: 1px rgba(255, 255, 255, 0.08) solid;
+			text-align: center;	
+			font-size: $font_size - 2;
+			line-height: 0.02rem;
+
+			i{
+				font-size: 	($font_size * 2) + 2;
+				display: block;
+				margin-bottom: 15px;
+			}
+
+			span{
+				display: block;
+			}
 
 			&:hover{
 				background: $base_color;

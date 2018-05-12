@@ -2,14 +2,18 @@
 
 
 <div *ngIf="isDashboard" class="container-fluid dashbaord">
+	<!-- <div class="ui active dimmer" *ngIf="!isLoaded">
+    	<div class="ui loader"></div>
+  	</div> -->
+
 	<div class="header">
 	
 	</div>
-	<div class="content_wrapper">
+	<div class="content_wrapper">  
 		<div class="nav_content">
 			<app-nav></app-nav>
 		</div>
-		<div class="right_content">
+		<div class="right_content">  
 			<div class="right_content_inner"> 
 				<router-outlet ></router-outlet>
 			</div>

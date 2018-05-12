@@ -9,6 +9,7 @@ import { AddHotelComponent } from './admin/hotel/add-hotel/add-hotel.component';
 import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.component';
 import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
 import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
+import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery.component';
 
 
 import { AuthGuard } from './auth.guard'; 
@@ -58,6 +59,10 @@ export const AppRoutes: Routes = [
       canActivate: [AuthGuard], 
     },
 
+    { path: 'admin/hotel/add-gallery/:id', 
+      component: ImageGalleryComponent, 
+      canActivate: [AuthGuard], 
+    },
 
 
     

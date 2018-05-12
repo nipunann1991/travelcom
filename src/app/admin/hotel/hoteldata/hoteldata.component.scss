@@ -3,10 +3,17 @@
 .view_hotel{
 
 	.left_content.hotel{
-		padding: 0 0 50px 0;
+		padding: 0 15px 50px 0;
 
 		.hotel_main_details{ 
 			overflow: hidden; 
+			padding: 25px;
+		    border: 1px #dcdcdc solid;
+		    box-shadow: 0px 1px 2px 0 rgba(178,178,178,0.4);
+		    background: #fff;
+		    position: relative;
+
+			$hotel_img_width : 200px;
 
 			.main_img{
 				width: $hotel_img_width;
@@ -17,29 +24,72 @@
 			    //background-image: url(../../assets/images/properties1.jpg);
 			    background-size: cover;
 			    border: 1px #d1d1d1 solid;
-			    border-radius: 4px;
+			    border-radius: 50%;
 			}
 
 			.hotel_details{
 				float: left;
 				@include calc('width', '100% -  '+$hotel_img_width);
-				padding: 0 30px;
+				padding: 0 10px 0 30px; 
 
+				span.property_type{
+					padding: 3px 20px;
+					background: $base_color;
+					position: absolute;
+					right: 0;
+					color: #fff;
+					display: none;
+				} 
+
+				button.book_now{
+					float: right;
+				}
 
 				h2{
 					margin-bottom: 0;
 					font-size: $heading_font_size - 3;
 				}
+				
+				p.location{
+					margin-top: 2px;
 
+					i{
+						margin-right: 3px;
+						color: $base_color;
+					}
+				}
 				.hotel_contact_details{
-					margin-top: 10px;
+					margin-top: 25px;
+					
 
 					ul{
 						padding: 0;
+						display: flex;
 
 						li{
-							font-size: $font_size - 1;
+							font-size: $font_size;
+							line-height: $font_size + 8 ;
 							list-style: none;
+							width: 100%;
+							border-left: 1px #d0d0d0 solid;
+							padding: 0 12px;
+
+							&:last-child{
+								border-right: 1px #d0d0d0 solid;
+
+							}
+
+							span{
+								display: block;
+								text-align: center;
+
+
+								&.title{
+									margin-bottom: 5px;
+									font-weight: 600;
+
+								}
+							}
 
 							i{
 								margin-right: 10px;
@@ -56,14 +106,45 @@
     					display: block;
 					}
 					p{
-						font-size: $font_size - 1;
+						font-size: $font_size;
 					}
 				}
 
 			}
+		} 
+ 
+		.gallery{
+			padding: 30px;
+		    background: white;
+		    margin-top: 50px;
+		    box-shadow: 0px 1px 2px 0 rgba(178,178,178,0.4);
+		    border: 1px solid #dee2e6;
+
+		    .row_.title{
+
+		    	h2{
+					font-size: $font_size + 8;
+					margin-bottom: 15px;
+					float: left;
+				}
+
+				a.add_images{
+					float: right;
+					text-decoration: none;
+				}
+
+		    }
+
+			
+			 
+			ngx-slick{
+				padding: 0;
+			} 
+
 		}
 
 		.hotel_sub_details{ 
+
     		margin-top: 30px; 
     		width: 100%;
     		overflow: hidden; 
@@ -96,7 +177,9 @@
 				// }
 			}
     		.tab-content{
-    			border-top: 1px solid #dee2e6;
+    			border: 1px solid #dee2e6;
+			    background: white;
+			    padding: 0 20px;
 
     			.tab-pane{ 
     				margin: 30px 0;
@@ -167,6 +250,7 @@
 						width: 25%;
 						list-style: none;
 						margin-bottom: 10px;
+						font-size: $font_size;
 
 						&.disabled{
 							opacity: 0.25;

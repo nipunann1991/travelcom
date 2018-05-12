@@ -48,6 +48,10 @@ export class LoginComponent implements OnInit {
  		}
  	});
 
+
+   let self = this;
+
+
     this.http.post(serverURL+'LoginController/getLoginCredentials',params)
     .subscribe(
         res => {
@@ -57,8 +61,9 @@ export class LoginComponent implements OnInit {
           this.response = res;
 
           if (this.response.status == 200) {
-            sessionStorage.setItem('token', '1234'); 
-            this.router.navigate(['dashboard']);
+            sessionStorage.setItem('token', '1234');
+            location.href="/dashboard";
+            //self.router.navigate(['/dashboard']);
           }
 
           console.log(this.response.status);

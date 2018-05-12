@@ -11,6 +11,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
 	token: any = sessionStorage.getItem('token');
+  isAdmin : boolean= false;
+
+
 
   canActivate() {
     console.log('i am checking to see if you are logged in');
@@ -39,5 +42,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
     
   }
+
+ 
 
 }

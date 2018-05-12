@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router  , ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http'; 
 import { serverURL } from  "../../../app.global";
+import { AuthGuard } from '../../../auth.guard';
+import { BootstrapGrowlService, BootstrapAlertType } from 'ngx-bootstrap-growl';
+
 import 'rxjs/add/operator/toPromise';
+declare var $: any;
 
 @Component({
   selector: 'app-hoteldata',
@@ -11,7 +15,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class HoteldataComponent implements OnInit {
 
-	hotelID: number; service_list : any;
+	hotelID: number; service_list : any; isAdmin : boolean; isPublished : boolean = false;
 
 	hotel_details : any = {
 		 ptype_id: '',
@@ -28,16 +32,43 @@ export class HoteldataComponent implements OnInit {
 
 	};
 
-	facilities : any = {}; selected_card_list : any = {}; card_list : any;
+	facilities : any = {}; selected_card_list : any = {}; card_list : any; room_types : any;
+	masonryItems: any = [];
 
+	// masonryItems: any = [
+	// 	{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// 	{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// 	{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// 	{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// 	{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// 	{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	// ];
 
-  constructor(private http: HttpClient, private router: Router, private activeRoute: ActivatedRoute) { }
+	 slideConfig = {"slidesToShow": 3, "slidesToScroll": 3,  'dots': true};
+
+  constructor(private http: HttpClient, private router: Router, private activeRoute: ActivatedRoute,  private bootstrapGrowlService: BootstrapGrowlService,  private authservice: AuthGuard) { }
 
   ngOnInit() {
   	this.hotelID = this.activeRoute.snapshot.params['id'];
   	this.getHotel();  
   	this.getServiceList();
   	this.getCardList();
+  	this.getRooms();
+    this.getGallery();
+    
+    $('.ui.active.dimmer').addClass('hide');
+
+  	this.isAdmin = this.authservice.isDashboard();
+
+
+  	$(document).ready(function(){ //Photos Gallery
+           $(".fancybox").fancybox({
+               openEffect: "elastic",
+               closeEffect: "none",
+               padding: 0
+           });
+       });
+
   }
 
  public getHotel() {
@@ -67,7 +98,7 @@ export class HoteldataComponent implements OnInit {
  						if (hotel_data.address1 != '' && hotel_data.address2 != '' ) {
  							address = hotel_data.address1+ ', '+hotel_data.address2+', '+hotel_data.city+', '+hotel_data.country
  						}else{
- 							address = hotel_data.address1+ ', '+hotel_data.city+', '+hotel_data.county
+ 							address = hotel_data.address1+ ', '+hotel_data.city+', '+hotel_data.country
 
  						}
 
@@ -92,6 +123,12 @@ export class HoteldataComponent implements OnInit {
 
 						};
 
+						console.log(hotel_data.status, this.isPublished);
+
+						if (hotel_data.status == '1') {
+							this.isPublished = true;
+						}
+
 	 					$('.hotel_img').attr('style','background-image: url('+this.hotel_details.image_url+')');
 
  						//console.log(this.hotel_details);
@@ -111,7 +148,153 @@ export class HoteldataComponent implements OnInit {
 			
 			return promise;
 
+  	}	
+
+
+  	editHotel(){
+  		this.router.navigate(['/admin/hotel/edit-hotel/'+this.hotelID]);
   	}
+
+  	addMoreImages(){
+  		this.router.navigate(['/admin/hotel/add-gallery/'+this.hotelID]);
+  	}
+
+
+  	publishHotel(val){ 
+
+  		let data : any = { hotel_id: this.hotelID, status: val };
+
+	  	const params = new HttpParams({
+	 		fromObject : data 
+	 	});
+
+  		let promise = new Promise((resolve, reject) => {
+
+		  	this.http.post(serverURL+'/HotelController/updateHotelDetails', params)
+		    .toPromise()
+	      	.then(
+		        res => { 
+
+		 			 let response : any  = res;
+		 			 let txt : string = ''
+
+	         		if (response.status == 200 ) { 
+
+	         			if (val == 1) {
+							this.isPublished= true;
+							txt = 'Published';
+						}else{
+							this.isPublished= false;
+							txt = 'Unublished';
+
+						}
+				   		
+				   		this.bootstrapGrowlService.addAlert("Hotel "+txt+" successfully.", BootstrapAlertType.SUCCESS);
+				   	}
+
+		        },
+		        err => {
+		          console.log(err);
+		        }
+		    );
+
+
+		});
+			
+		return promise;
+  	}
+
+  	getRooms(){
+
+  		let hotel_id : any = { 'hotel_id': this.hotelID };
+	  
+	  	const params = new HttpParams({
+	 		fromObject : hotel_id
+	 	});
+	 
+
+		let promise = new Promise((resolve, reject) => {
+
+		 	this.http.post(serverURL+'/HotelController/getHotelRoomTypes',params)
+	      	.toPromise()
+	      	.then(
+	        	res => { 
+	        		 
+	         		let response : any  = res;
+
+	         		if (response.status == 200 ) { 
+
+ 						this.room_types = response.data; 
+
+ 						console.log(this.room_types.length);
+ 						
+ 
+	         		}else{
+	         			 
+	         		}
+
+	         		 
+	          		resolve();
+	        	}
+	      );
+		   
+		   
+		});
+			
+		return promise;
+  		
+  	}
+
+
+  	getGallery(){
+
+  		let hotel_id : any = { 'hotel_id': this.hotelID };
+	  
+	  	const params = new HttpParams({
+	 		fromObject : hotel_id
+	 	});
+	 
+
+		let promise = new Promise((resolve, reject) => {
+
+		 	this.http.post(serverURL+'/HotelController/getHotelGalleryImages',params)
+	      	.toPromise()
+	      	.then(
+	        	res => { 
+	        		 
+	         		let response : any  = res;
+
+	         		if (response.status == 200 ) {  
+
+ 						let images = response.data;
+
+ 						for (var i = 0; i < images.length; i++) {
+ 							
+
+ 							this.masonryItems.push({
+ 								img: images[i].image_url
+ 							});
+ 						}
+ 						
+
+ 						console.log(this.masonryItems);
+ 
+	         		}else{
+	         			 
+	         		}
+
+	         		 
+	          		resolve();
+	        	}
+	      );
+		   
+		   
+		});
+			
+		return promise;
+  		
+  	}
+
 
 
   	getServiceList() : any { 
