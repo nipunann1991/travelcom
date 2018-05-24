@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http'; 
 import 'rxjs/add/operator/toPromise';
 
-import { serverURL } from  "../../../app.global";
+import { serverURL, fileManager } from  "../../../app.global";
 import { Router } from "@angular/router";
 import { ViewChild } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
@@ -57,8 +57,6 @@ export class AddHotelComponent implements OnInit {
   	this.getServiceList();
   	this.getPropertyType();
   	this.getCardList();
- 	
-
 
   }
 
@@ -69,8 +67,7 @@ export class AddHotelComponent implements OnInit {
   	this.room_type.push(x);
 
   	this.room_type_txt = '';
-
-  	console.log(this.room_type)
+ 
 
   }
 
@@ -131,8 +128,7 @@ export class AddHotelComponent implements OnInit {
 	    }else{
 	    	this.facilities[alias] = 0 
 	    }
-
-	    console.log(this.facilities); 
+ 
 
 	}
 
@@ -371,10 +367,11 @@ export class AddHotelComponent implements OnInit {
 	          		upload_file = data
 	 				 
 
-	 				this.hotel_details.image_url =  upload_file.data.target_file
+	 				this.hotel_details.image_url =  upload_file.data.new_file
 
-	 				$('.hotel_img').attr('style','background-image: url('+upload_file.data.target_file+')');
-	             	$('file-drop .content .loader').remove()
+	 				$('.hotel_img').attr('style','background-image: url('+fileManager+""+upload_file.data.new_file+')');
+	             	$('file-drop .content .loader').remove();
+
 	          	})
  
 	         

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
+declare var jquery:any;
+declare var $ :any;
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
 
 	constructor(private router: Router) { 
-
+    
   }
 
 	token: any = sessionStorage.getItem('token');
@@ -17,6 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate() {
     console.log('i am checking to see if you are logged in');
+   
 
     if (this.token) {
     	 return true;
@@ -34,7 +37,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   isDashboard(){
 
-    if (this.token) {
+    if (this.token) { 
+
        return true;
     }else{
       //this.router.navigate(['login']);

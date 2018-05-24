@@ -6,10 +6,11 @@
 				<h3>Find Hotels, Villas to Enjoy your holiday.</h3>
 			</div>
 		  	<div class="field"> 
-		        <div class="ui action input">
-		            <input type="text" id="postalCode05" placeholder="Search"/>
-		            <button class="ui green button search_btn">Search</button>
+		        <div class="ui action search">
+		            <input type="text" class="prompt" id="postalCode05"  placeholder="Search" (ngModelChange)="searchString($event)"  [(ngModel)]="search_txt"/>
+		            <button class="ui green button search_btn" (click)="search()">Search</button>
 		        </div>
+ 				 <div class="results results_container"></div>
 		    </div>
 		</div>
 	</div> 
@@ -20,8 +21,10 @@
 		 	<h2>Most Populer <span>Hotels</span></h2>
 		 	<p>Find Hotels, Villas to Enjoy your holiday.</p>
 		</div>
+
 		<ngx-slick class="carousel content multiple-items hotel_list" #slickModal="slick-modal" [config]="slideConfig"  >
-	        <div ngxSlickItem *ngFor="let h of hotel" class="slide hotels block" routerLink="/hotel/{{h.id}}">
+
+	        <div ngxSlickItem *ngFor="let h of hotel" class="slide hotels block" routerLink="/hotel/{{h.hotel_id}}">
 	              	<div class="featured" *ngIf="h.featured" >
 						<svg preserveAspectRatio="xMidYMid meet" width="62" height="62" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">  
 
@@ -38,12 +41,13 @@
 						  </svg>
 						</svg>
 					</div> 
-	              <div class="img img1"  [ngStyle]="{'background-image':'url(' + h.image + ')'}">  
+	            <div class="img img1"  [ngStyle]="{'background-image':'url(' + fm + '' + h.image_url + ')'}">  
+					<span class="ptype" [ngStyle]="{'background':''+ h.ptype_color +''}"  >{{h.ptype_name}}</span>
 				</div>
-				<div class="body">
+				<div class="body_">
 					<h3>{{h.hotel_name}}</h3>
-					<span class="location"> <i class="icon-location"></i> {{h.location}} </span>
-					<p>{{h.desc}}</p>
+					<span class="location"> <i class="icon-location"></i> {{h.city}} </span>
+					<p>{{h.hotel_desc}}</p>
 				</div>
 				<div class="services_offer">
 					<ul>
@@ -53,10 +57,12 @@
 						<li><i class="icon-car"></i></li> 
 						
 					</ul> 
+
+					
 				</div>
 	        </div>
 	    </ngx-slick> 
-
+		<button class="ui button green view_all" routerLink="/search-hotel" [queryParams]="{ hotels: 'all' }">View All Hotels</button>
 	</div>
 </section>
 
@@ -68,59 +74,16 @@
 		</div>
 		<div class="grid row content">
 		  	
-		  	<div class="grid_item col-md-6"> 
-				<div class="grid_item_inner" style="background-image: url(./assets/images/colombo.jpg);" routerLink="/search-hotel/colombo">
+		  	<div *ngFor="let c of cities" class="grid_item {{c.size}}"> 
+				<div class="grid_item_inner"  [ngStyle]="{'background-image':'url(' + c.img_url + ')'}" routerLink="/search-hotel" [queryParams]="{ city: c.alias }">
 					<div class="text_content"> 
-			  			<h3>Colombo</h3>
-			  			<span>Western Province - Sri Lanka</span>
+			  			<h3>{{c.city}}</h3>
+			  			<span>{{c.province}}</span>
 					</div>
 		  		</div>
 		  	</div>
 
-		  	<div class="grid_item col-md-3"> 
-		  		<div class="grid_item_inner"  style="background-image: url(./assets/images/nuwaraeliya.jpg);">
-		  			<div class="text_content"> 
-			  			<h3>Nuwaraeliya</h3>
-			  			<span>Central Province - Sri Lanka</span>
-					</div>
-		  		</div> 
-		  	</div> 
-		  	
-		  	<div class="grid_item col-md-3 "> 
-				 <div class="grid_item_inner"  style="background-image: url(./assets/images/ella.jpg);">
-		  			<div class="text_content"> 
-			  			<h3>Ella</h3>
-			  			<span>Uva Province - Sri Lanka</span>
-					</div>
-		  		</div> 
-		  	</div> 
-
-		  	<div class="grid_item col-md-4 "> 
-				 <div class="grid_item_inner"  style="background-image: url(./assets/images/kandy.jpg);">
-		  			<div class="text_content"> 
-			  			<h3>Kandy</h3>
-			  			<span>Central Province - Sri Lanka</span>
-					</div>
-		  		</div> 
-		  	</div> 
-
-		  	<div class="grid_item col-md-4 "> 
-				 <div class="grid_item_inner"  style="background-image: url(./assets/images/hikkaduwa.jpg);">
-		  			<div class="text_content"> 
-			  			<h3>Hikkaduwa</h3>
-			  			<span>Southern Province - Sri Lanka</span>
-					</div>
-		  		</div> 
-		  	</div> 
-
-		  	<div class="grid_item col-md-4 "> 
-				 <div class="grid_item_inner"  style="background-image: url(./assets/images/anuradhapura.jpg);">
-		  			<div class="text_content"> 
-			  			<h3>Anuradhapura</h3>
-			  			<span>North Central Province - Sri Lanka</span>
-					</div>
-		  		</div> 
-		  	</div>  
+		   
 		</div>
 	</div>
 </section>
@@ -131,18 +94,12 @@
 		 	<h2>Find Out For <span> Deals</span></h2>
 		 	<p>Find hotels in most populer cities in Sri Lanka</p>
 		</div>
-		<!-- <div class="multiple-items deals_list hidden-xs">
-		    <div class="deals_item"> </div>
-		    <div class="deals_item"> </div>
-		    <div class="deals_item"> </div>
-		    <div class="deals_item"> </div>
-		    <div class="deals_item"> </div>
-		    <div class="deals_item"> </div>
-		</div> -->
-
+	  
 		<ngx-slick class="carousel deals_list  hidden-xs" #slickModal="slick-modal" [config]="slideConfig"  >
-        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-              <img src="{{ slide.img }}" alt="" width="100%">
+        <div ngxSlickItem *ngFor="let a of ads" class="slide">
+        	<a class="fancybox" data-fancybox="gallery1" href="{{filepath}}{{a.img_url}}">
+              <img src="{{filepath}}{{ a.img_url }}" alt="" width="100%">
+            </a>
         </div>
     </ngx-slick>
 	</div>

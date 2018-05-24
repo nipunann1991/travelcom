@@ -23,8 +23,7 @@
 			.hotel_details{
 				float: left;
 				@include calc('width', '100% -  '+$hotel_img_width);
-				padding: 0 30px;
-				
+				padding: 0 30px; 
 
 
 				h2{
@@ -79,22 +78,8 @@
 						font-weight: 500;
 					}
 				}
-
-					
-
-				// .nav-link{
-				// 	background: #333;
-				// 	color: #fff;
-				// 	border-radius: 20px;
-				// 	margin-right: 10px;	
-
-
-				// 	&.active{
-				// 		background: $base_color;
-				// 		border-radius: 20px;
-				// 		color: #fff;
-				// 	}
-				// }
+ 
+			 
 			}
     		.tab-content{
     			border-top: 1px solid #dee2e6;
@@ -190,8 +175,11 @@
 		    font-size: $heading_font_size - 7;  
 		    background: #d8d8d8;
 		    margin: 0 -15px;
+		    margin-bottom: 20px;
 
 		}
+
+		
 	}
 
 }

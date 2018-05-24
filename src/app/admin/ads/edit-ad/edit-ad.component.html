@@ -1,0 +1,84 @@
+<div class="header col-md-12">
+    <h2>Edit Ad</h2> 
+    <span class="breadcrumb_nav">Home > Edit Ad</span>
+
+    <div class="row_ btn_row"> 
+        <button class="ui submit button  green" routerLink="/admin/ads/ads-list" ><i class="icon-list"></i> View Ads List</button>
+     </div>
+
+</div>
+
+<div class="body col-md-12">
+	<div class="row">
+		<div class="col-md-6">
+		 	<div class="ui form"> 
+			  	<div class="grouped fields">
+					<label for="fruit">Select your add category:</label>
+					<div class="field">
+					      <div class="ui radio checkbox">
+					        <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+					        <label>Individual Ad</label>
+					      </div>
+				    </div>
+				    <div class="field">
+					    <div class="ui radio checkbox">
+					        <input type="radio" name="fruit" tabindex="0" class="hidden">
+					        <label>Ad by a Property</label>
+					    </div>
+				    </div>
+				    <div class="field hide">
+				      	<label>Hotel Name</label>
+				      	<div class="ui selection dropdown">
+				          	<input type="hidden" name="gender">
+				          	<i class="dropdown icon"></i>
+				          	<div class="default text">Hotel Name</div>
+				          	<div class="menu">
+				              	<div class="item" data-value="1">Male</div>
+				              	<div class="item" data-value="0">Female</div>
+				          	</div>
+				      </div>
+				  	</div> 
+				  	<div class="required field">
+	                    <label>Description</label>
+	                    <textarea rows="4" name="description" [(ngModel)]="ad_details.ad_desc" ></textarea>
+                	</div>
+					
+					<div class="field">
+	                    <div class="ui checkbox">
+						  <input type="checkbox" id="featured" [(ngModel)]="isFeatured" (change)="featured()">
+						  <label for="featured">Featured Ad <em>(This will be shown on right sidebar.)</em></label>
+						</div>
+                	</div>
+
+                	<div class="field">
+	                    <div class="ui checkbox">
+						  <input type="checkbox" id="publish" [(ngModel)]="isPublished" (change)="published()">
+						  <label for="publish">Publish Now</label>
+						</div>
+                	</div>
+
+                	
+
+                	
+                	<div class="required field">
+                		<button class="ui submit button  green" (click)="updateAd()" >Update Ad</button>
+                		<button class="ui submit button "  (click)="cancel()" >Cancel</button>
+                	</div>
+				     
+			  	</div>
+			</div>
+		</div>
+		<div class="col-md-6 ">
+            <div class="ads_img ui segment">
+                
+                <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
+                  
+                </file-drop>
+
+
+            </div> 
+        </div>
+	</div>
+	
+</div>

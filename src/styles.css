@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/sass/_fonts.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900');
+ @import './assets/sass/_fonts.css';
+
+/**{
+    font-family: 'Poppins', sans-serif;
+}*/
 
 /*
    server-side-angular-way.component.css
@@ -12,6 +17,8 @@
    src/styles.css (i.e. your global style)
 */
  
+
+ *{  }
 
 .dataTables_wrapper .dataTables_filter input {
     margin-left: 0.5em;
@@ -52,6 +59,26 @@ table.data_exist .dataTables_empty{
     font-size: 12px;
 }
 
+
+.ui.category.search .results{
+  margin-top: 0px;
+  width: 84%;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0; 
+}
+
+
+.ui.search>.results .result .title{
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+/*.ui.category.search .results.transition.visible{
+  height: 200px;
+  overflow: scroll;
+}
+*/
 body{
   background: #f9f9f9;
 }
@@ -64,6 +91,18 @@ body{
   max-width: 90%;
 }
 
+
+@media (max-width: 767px){
+  .container{
+    max-width: 100%;
+  }
+
+}
+
 .hide{
   display: none !important;
 }
+
+.modal-dialog .modal-content .modal-header .close{ position:absolute; right:10px}
+.modal-dialog .modal-content .modal-header h4.modal-title{ width:100%; text-align:left; font-size: 18px;}
+.modal-dialog .modal-content .modal-header{ padding: 10px 15px; background: #e0e1e2; }

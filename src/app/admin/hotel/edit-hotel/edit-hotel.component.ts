@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http'; 
 import 'rxjs/add/operator/toPromise';
 
-import { serverURL } from  "../../../app.global";
+import { serverURL, fileManager } from  "../../../app.global";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ViewChild } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
@@ -25,7 +25,7 @@ export class EditHotelComponent implements OnInit {
 	public files: UploadFile[] = [];
 
 	hotelID: number; province : any; property_type : any; service_list : any; card_list : any; fileToUpload: File = null;
-	isCheckedServices: boolean = false; isCheckedCards: boolean = false; x : number = 3;
+	isCheckedServices: boolean = false; isCheckedCards: boolean = false; x : number = 3; index : number;
 
 	hotel_details : any = {
 		 ptype_id: '',
@@ -43,7 +43,7 @@ export class EditHotelComponent implements OnInit {
 
 	};
 
-	facilities : any = {}; selected_card_list : any = {}; 
+	facilities : any = {}; selected_card_list : any = {};  room_type : any = [];  room_type_txt : any; editMode : boolean = false;
 	
 
 
@@ -58,7 +58,9 @@ export class EditHotelComponent implements OnInit {
   	this.getPropertyType();
   	this.getCardList();
   	this.getHotelData();
- 	
+  	this.getRoomTypes(); 
+
+
   }
 
   
@@ -94,7 +96,7 @@ export class EditHotelComponent implements OnInit {
 	 			this.hotel_details = this.hotel_details.data[0];
 
 	 			if (this.hotel_details.image_url != null) {
-	 				$('.hotel_img').attr('style','background-image: url('+this.hotel_details.image_url+')');
+	 				$('.hotel_img').attr('style','background-image: url('+fileManager+""+this.hotel_details.image_url+')');
 	 			}
 
 	 			
@@ -108,9 +110,109 @@ export class EditHotelComponent implements OnInit {
 	}
 
 
+	getRoomTypes() : any {
+
+		let hotel_id : any = { 'hotel_id': this.hotelID };
+
+		const params = new HttpParams({
+	 		fromObject : hotel_id
+	 	});
+	 
+ 
+	  	this.http.post(serverURL+'/HotelController/getRoomType', params)
+	    .subscribe(
+	        res  => { 
+
+        		let rooms : any = res; 
+
+        		for (var i = 0; i < rooms.data.length; i++) {
+        			this.room_type.push({'rt_id': rooms.data[i].rt_id, 'rt_name': rooms.data[i].rt_name });
+        		}
+
+	        },
+	        err => {
+	          console.log(err);
+	        }
+	    );
+
+	}
+
+
 	viewHotel(){
   		this.router.navigate(['/admin/hotel/view-hotel/'+this.hotelID]);
 	}
+
+
+	addRoomTypes(): any {
+
+	  	let x =  { 'rt_name': this.room_type_txt }
+	  	this.room_type.push(x);
+
+	  	this.room_type_txt = '';
+
+	  	console.log(this.room_type)
+
+	}
+
+	removeIndex(i){ 
+
+		let self = this;
+
+		if (typeof this.room_type[i].rt_id == 'undefined' ) {
+			self.room_type.splice(i, 1);
+
+		}else{
+
+			bootbox.confirm({
+			    title: "Remove Room Type",
+			    message: "Are you sure you want to delete 'Room Type'? ",
+			    buttons: {
+			        cancel: { 
+			        	className: 'ui button',
+			            label: 'Cancel'
+			        },
+			        confirm: {
+			        	className: 'ui button green',
+			            label: 'Confirm'
+			        }
+			    },
+			    callback: function (result) {
+			    	if (result) {
+
+			    		self.room_type[i].hotel_id = self.hotelID; 
+			    		let obj : any = { 'hotel_id': this.hotelID };
+
+			    		console.log(self.room_type[i]);
+
+			    		self.deleteRoomType(self.room_type[i]);
+			    		self.room_type.splice(i, 1);
+			    	}
+			    	
+			        console.log('This was logged in the callback: ' + result);
+			    }
+			});
+		}
+
+	  	
+	}
+
+	editIndex(i, val){ 
+		this.index = i;
+		this.room_type_txt = val;
+		this.editMode = true;
+	}
+
+	editChages(eventVal){ 
+		this.room_type[this.index].rt_name = eventVal; 
+
+	}
+
+
+	editDone(){
+		this.room_type_txt = '';
+		this.editMode = false;
+	}
+
 
 
 	getPropertyType(){
@@ -188,17 +290,12 @@ export class EditHotelComponent implements OnInit {
 
 	         		if (response.status == 200 ) {
 
-	         			this.facilities['hotel_id'] = this.hotelID;
-
-
-
-	         			//alert('added successfully');  
+	         			this.facilities['hotel_id'] = this.hotelID; 
 
 	         			const params1 = new HttpParams({
 					 		fromObject : this.facilities
 					 	});
-
-					 	console.log(this.facilities);
+ 
 	         			 
 	         			this.http.post(serverURL+'/HotelController/editFacilities',params1)
 				      	.toPromise()
@@ -253,6 +350,44 @@ export class EditHotelComponent implements OnInit {
 				    );
 
 
+				    if (this.room_type.length > 0) {
+
+				    	for (var i =0; i < this.room_type.length; i++) {
+				    		this.room_type[i]['hotel_id'] = this.hotelID;
+
+
+				    			const params3 = new HttpParams({
+							 		fromObject : this.room_type[i]
+							 	});
+			         			 
+			         			this.http.post(serverURL+'/HotelController/editRoomType',params3)
+						      	.toPromise()
+						      	.then(
+						        	res => { 
+						        		 
+						         		let response : any  = res;
+
+						         		console.log(response);
+
+						         		if (response.status == 200 ) {   
+
+						         			//this.bootstrapGrowlService.addAlert("Added accepetd cards successfully", BootstrapAlertType.SUCCESS);
+
+						         		}else{
+						         			 
+						         		}
+
+						         		 
+						          		resolve();
+						        	}
+							    );
+				    	}
+				    	// code...
+
+				    	console.log(this.room_type);
+				    }
+
+
 
 
 	         		}else{
@@ -289,6 +424,35 @@ export class EditHotelComponent implements OnInit {
 
 		 			this.getHotelProvidedServices();
  
+
+		 			resolve();
+
+		        },
+		        err => {
+		          console.log(err);
+		        }
+		    );
+
+
+		});
+			
+		return promise;
+
+	}
+
+	deleteRoomType(obj) : any {
+
+	  
+	  	const params = new HttpParams({
+	 		fromObject : obj
+	 	});
+
+		let promise = new Promise((resolve, reject) => {
+
+		  	this.http.post(serverURL+'/HotelController/deleteRoomType', params)
+		    .toPromise()
+	      	.then(
+		        res => { 
 
 		 			resolve();
 
@@ -481,15 +645,15 @@ export class EditHotelComponent implements OnInit {
 	          		upload_file = data
 	 				 
 
-	 				this.hotel_details.image_url =  upload_file.data.target_file
+	 				this.hotel_details.image_url =  upload_file.data.new_file;
 
-	 				$('.hotel_img').attr('style','background-image: url('+upload_file.data.target_file+')');
+	 				$('.hotel_img').attr('style','background-image: url('+fileManager+""+upload_file.data.new_file+')');
 	             	$('file-drop .content .loader').remove()
 	          	})
  
-	         
 	 
 	        });
+
 	      } else {
 	        // It was a directory (empty directories are added, otherwise only files)
 	        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;

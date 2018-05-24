@@ -7,7 +7,7 @@
   	</div> -->
 
 	<div class="header">
-	
+		
 	</div>
 	<div class="content_wrapper">  
 		<div class="nav_content">
@@ -23,4 +23,8 @@
 </div>
  
 <bootstrap-growl [alertCount]="" [autoClose]="10000"></bootstrap-growl>
-<router-outlet *ngIf="!isDashboard"></router-outlet>
+<router-outlet *ngIf="!isDashboard">
+	<div class="loader_screen">
+		<img src="assets/images/loader.svg" alt="">
+	</div> 
+</router-outlet>

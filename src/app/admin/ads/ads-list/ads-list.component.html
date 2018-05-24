@@ -1,0 +1,50 @@
+<div class="header col-md-12">
+     <h2>View Ads</h2> 
+     <span class="breadcrumb_nav">Home > View Ads</span>
+     <div class="row_ btn_row">
+     	<button class="ui submit button green" routerLink="/admin/ads/new-ad" >
+     		<i class="icon-add-button"></i> 
+     		Create New Ad
+     	</button>  
+     </div>
+</div>
+ 
+<div class="body col-md-12">
+	 
+	 <table datatable [dtOptions]="dtOptions" class="row-border hover" [ngClass]="{'data_exist': isDataTable }">
+	  <thead>
+	    <tr>
+	      <th>Ad ID</th>
+	      <th>Ad Image</th>
+	      <th>Ad Desc</th>
+	      <th>Featured</th>
+	      <th> </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let a of ads">
+	      	<td><span class="dot {{ a.ad_id }}"></span> {{ a.ad_id }}</td>
+	      	<td> 
+	      		<a data-fancybox="gallery" href="{{ a.img_url }}" > 
+	      			<span class="ad_img" [ngStyle]="{'background-image':   'url(' + a.img_url + ')'}"  ></span> 
+	      		</a>
+	      	</td>
+	      	<td>{{ a.ad_desc }}</td>
+	      	<td>{{ a.featured }}</td>
+	      	<td>
+		      	<a  data-fancybox="gallery" href="{{ a.img_url }}" > 
+		      		<i class="icon-eye eye"></i>
+		      	</a>
+		      	<a routerLink="/admin/ads/edit-ad/{{ a.ad_id }}" >
+					<i class="icon-pencil-edit-button"></i>
+		      	</a> 
+	      </td>
+	    </tr>
+
+	    
+	   <!--  <tr *ngIf="Hotels?.length == 0">
+	      <td colspan="3" class="no-data-available">No data!</td>
+	    </tr> -->
+	  </tbody>
+	</table>
+</div>

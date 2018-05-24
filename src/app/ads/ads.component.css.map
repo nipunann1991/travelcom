@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,GAAG,CAAE,SAAS,CAAE,IAAI,CAAE,aAAa,CAAE,IAAI",
+"sources": ["ads.component.scss"],
+"names": [],
+"file": "ads.component.css"
+}

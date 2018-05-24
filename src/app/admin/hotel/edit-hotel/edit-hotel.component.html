@@ -122,17 +122,20 @@
                 <div class="row">
                     <div class="field col-md-4"> 
                         <h3>Room Types</h3>
-                        <div class="ui action input "> 
+                        <div class="ui action input" *ngIf="!editMode"> 
                             <input type="text" placeholder="Search"  [(ngModel)]="room_type_txt"/>
                             <button class="ui button add_btn" (click)="addRoomTypes()">Add</button>
                         </div>
+
+                        <div class="ui action input" *ngIf="editMode"> 
+                            <input type="text" placeholder="Search" (ngModelChange)="editChages($event)"  [(ngModel)]="room_type_txt"/>
+                            <button class="ui button yellow add_btn" (click)="editDone()">Edit</button>
+                        </div>
                     </div>
 
-                    <ul class="col-md-4 offset-md-1">
-                        
+                    <ul class="col-md-4 offset-md-1"> 
                         <li *ngFor="let rt of room_type; let i = index" >
-                            {{rt.rt_name}}
-
+                            <span (click)="editIndex(i, rt.rt_name)">{{rt.rt_name}}</span>
                             <span (click)="removeIndex(i)" class="remove">Remove</span>
                         </li>
                     </ul>

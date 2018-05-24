@@ -22,11 +22,11 @@ export class AppComponent {
                 return;
             }
             window.scrollTo(0, 0) 
+            $('.loader_screen').attr('style','display: flex;');
         });
 
 
        this.isDashboard = this.authService.isDashboard()
-       this.isLoaded =  this.authService.isLoaded;
 
        if (this.authService.canActivate()) {
           //this.router.navigate(['dashboard']);

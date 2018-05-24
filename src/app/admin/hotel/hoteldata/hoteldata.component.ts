@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router  , ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http'; 
-import { serverURL } from  "../../../app.global";
+import { serverURL, fileManager } from  "../../../app.global";
 import { AuthGuard } from '../../../auth.guard';
 import { BootstrapGrowlService, BootstrapAlertType } from 'ngx-bootstrap-growl';
 
@@ -33,16 +33,16 @@ export class HoteldataComponent implements OnInit {
 	};
 
 	facilities : any = {}; selected_card_list : any = {}; card_list : any; room_types : any;
-	masonryItems: any = [];
-
-	// masonryItems: any = [
-	// 	{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// 	{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// 	{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// 	{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// 	{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// 	{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
-	// ];
+	masonryItems: any = []; fm : any = fileManager; gallery_url: any = this.fm+'gallery/';
+ 
+	masonryItems1: any = [
+		{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+		{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+		{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+		{ img: 'https://images.pexels.com/photos/45775/pexels-photo-45775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+		{ img: 'https://images.pexels.com/photos/221516/pexels-photo-221516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+		{ img: 'https://images.pexels.com/photos/121671/pexels-photo-121671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'},
+	];
 
 	 slideConfig = {"slidesToShow": 3, "slidesToScroll": 3,  'dots': true};
 
@@ -55,13 +55,13 @@ export class HoteldataComponent implements OnInit {
   	this.getCardList();
   	this.getRooms();
     this.getGallery();
-    
+
     $('.ui.active.dimmer').addClass('hide');
 
-  	this.isAdmin = this.authservice.isDashboard();
+  	this.isAdmin = this.authservice.isDashboard(); 
 
+   		$(document).ready(function(){ 
 
-  	$(document).ready(function(){ //Photos Gallery
            $(".fancybox").fancybox({
                openEffect: "elastic",
                closeEffect: "none",
@@ -123,13 +123,13 @@ export class HoteldataComponent implements OnInit {
 
 						};
 
-						console.log(hotel_data.status, this.isPublished);
+						
 
 						if (hotel_data.status == '1') {
 							this.isPublished = true;
 						}
 
-	 					$('.hotel_img').attr('style','background-image: url('+this.hotel_details.image_url+')');
+	 					$('.hotel_img').attr('style','background-image: url('+fileManager+"thumb/"+this.hotel_details.image_url+')');
 
  						//console.log(this.hotel_details);
 
@@ -277,7 +277,7 @@ export class HoteldataComponent implements OnInit {
  						}
  						
 
- 						console.log(this.masonryItems);
+ 						$('.loader_screen').fadeOut();
  
 	         		}else{
 	         			 

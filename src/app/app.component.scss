@@ -2,6 +2,21 @@
 
 $nav_width: 100px;
 
+.loader_screen{
+	width: 100%;
+	height: 100%;
+	position: fixed;	
+	background: #fff;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img{
+		width: 90px;
+	}
+}
+
 .dashbaord{
 	padding: 0;
 	@include viewport(); 
@@ -52,11 +67,14 @@ $nav_width: 100px;
 }
 
 
-:host ::ng-deep .alert-success{
+:host ::ng-deep .alert-success, :host ::ng-deep .alert-danger{
 	position: fixed; 
     right: 20px;
     top: 60px;
 }
+
+
+ 
 
 :host ::ng-deep .body{
 	padding: 30px;

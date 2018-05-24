@@ -35,12 +35,10 @@ export class ViewHotelComponent implements OnInit {
   ngOnInit() {
   	
   	const that = this;
-
-  //   $('.ui.active.dimmer').removeClass('hide');
-
+  
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 10,
       serverSide: true,
       processing: true,
 

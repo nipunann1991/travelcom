@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BootstrapGrowlComponent, BootstrapGrowlModule } from 'ngx-bootstrap-growl';
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from  "./app.routes";
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +30,10 @@ import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.componen
 import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
 import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
 import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery.component';
+import { AdsListComponent } from './admin/ads/ads-list/ads-list.component';
+import { NewAdComponent } from './admin/ads/new-ad/new-ad.component';
+import { EditAdComponent } from './admin/ads/edit-ad/edit-ad.component';
+import { AdsComponent } from './ads/ads.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,11 @@ import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery
     ViewHotelComponent,
     HoteldataComponent,
     EditHotelComponent,
-    ImageGalleryComponent, 
+    ImageGalleryComponent,
+    AdsListComponent,
+    NewAdComponent,
+    EditAdComponent,
+    AdsComponent, 
 
   ],
   imports: [
@@ -56,7 +65,7 @@ import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery
    
   ],
   exports: [ RouterModule ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 

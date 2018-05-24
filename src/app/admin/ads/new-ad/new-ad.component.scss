@@ -1,0 +1,21 @@
+@import '../../../../assets/sass/main';
+
+.ads_img {
+	background-size: cover;
+}
+
+:host ::ng-deep file-drop{
+
+	.drop-zone{
+		border-radius: 0;
+		height: 100%;
+		border-color: #b5b5b5;
+
+		.content{
+			height: 400px;
+			font-weight: 500;
+   	 		font-size: 18px;
+   	 		color: #b5b5b5;
+		}
+	}
+} 

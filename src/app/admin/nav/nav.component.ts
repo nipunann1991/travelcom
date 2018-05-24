@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
 		{
 			id: 1,
 			label: 'Dashboard',
-			url: 'dashboard',
+			url: 'admin/dashboard',
 			icon: 'icon-dashboard'
 			
 		},
@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
 		{
 			id: 3,
 			label: 'Advertisments',
-			url: 'admin/hotel/view-hotel',
+			url: 'admin/ads/ads-list',
 			icon: 'icon-desktop-monitor'
 		}
 	]

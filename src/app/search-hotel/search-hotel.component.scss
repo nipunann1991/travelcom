@@ -18,9 +18,17 @@
 
 		&.search_options{
 			background: #eee;
+			width: 270px;
+			float: left;
+			padding: 0 15px;
 
-			.body{
-				padding: 30px 0; 
+			@include custom-width(0, 1280px){
+				position: absolute;
+				left: -100%;
+			}
+
+			.body_{
+				padding: 15px 0; 
 			}
 
 			.ui.form{
@@ -52,17 +60,35 @@
 
 		&.hotel_list{ 
 
+			@include calc('width','100% - 610px');
+			float: left;
+			padding: 0 15px;
+			
+			@include custom-width(0, 1280px){
+				width: 100%;
+			}
+
 			.title{
 				padding: 10px 15px; 
 				background: transparent;   
 				overflow: hidden;
+				border-bottom: 1px #eee solid;
+				margin-bottom: 15px;
+
+				h2{
+					font-size: 24px;
+    				font-weight: 700;
+    				text-transform: capitalize;
+				}
 
 				h3{
 					text-align: left;   
 					float: left;
+					font-size: 15px;
+					margin-bottom: 0;
 
 					.ui.circular{
-						vertical-align: text-top;
+						
 					}
 				}
 
@@ -73,7 +99,7 @@
 			}
 
 			.hotels.block{
-				width: 100%; 
+				width: 270px; 
 				border: 1px #e1e0e0 solid;  
 	    		float: left;
 	    		margin-right: 15px;
@@ -81,10 +107,22 @@
 	    		margin-bottom: 15px; 
 	    		position: relative;
 				@include transition-effect();
+				border-radius: 5px;
+			    -webkit-box-shadow: 0 1px 2px 0 #b2b2b2;
+			    box-shadow: 0 1px 2px 0 #b2b2b2;
+			    overflow: hidden;
+
+			    @include mobile(){
+			    	float: none;
+			    	display: block;
+			    	margin: auto;
+					margin-bottom: 15px;
+
+				}
 
 
 	    		.featured{
-	    			position: absolute;
+	    			position: absolute; 
 	    			top: 0;
 	    			right: 0;
 	    		}
@@ -95,10 +133,10 @@
 	    			background: rgba(33, 186, 76, 0.05);
 	    		}
 				
-				$img_width: 150px;
+				$img_width: 170px;
 
 				.img{
-					width: $img_width;
+					width: 100%;
 					height: $img_width;
 					background: #eee; 
 					background-size: cover;
@@ -116,11 +154,14 @@
 	    			}
  
 				}
-				.body{
-					@include calc('width','100% - '+$img_width);
+				.body_{
+					//@include calc('width','100% - '+$img_width);
+					width: 100%;
 					float: left;
 					padding: 15px;
 					height: 122px;
+					margin-bottom: 15px;
+					overflow: hidden;
 
 					h3{
 						font-size: 17px;
@@ -170,6 +211,17 @@
 
 		&.adds_content { 
 			background: #eee; 
+			width: 310px;
+			float: left;
+			padding: 0 15px;
+
+			.title{
+				margin-bottom: 15px;
+			}
+
+			@include mobile(){ 
+				width: 100%;
+			}
 
 		}
 	}

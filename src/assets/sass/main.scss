@@ -48,3 +48,19 @@ table.dataTable thead th, table.dataTable thead td{
     background: #f0f0f0;
 }
 
+
+.modal-dialog{
+    .modal-content{
+        .modal-header{
+            .close{
+                position: absolute;
+                right: 0;
+            }
+
+            h4.modal-title{
+                width: 100%;
+                text-align: left;
+            }
+        }
+    }
+}

@@ -10,6 +10,9 @@ import { ViewHotelComponent } from './admin/hotel/view-hotel/view-hotel.componen
 import { HoteldataComponent } from './admin/hotel/hoteldata/hoteldata.component';
 import { EditHotelComponent } from './admin/hotel/edit-hotel/edit-hotel.component';
 import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery.component';
+import { AdsListComponent } from './admin/ads/ads-list/ads-list.component'; 
+import { NewAdComponent } from './admin/ads/new-ad/new-ad.component';
+import { EditAdComponent } from './admin/ads/edit-ad/edit-ad.component';
 
 
 import { AuthGuard } from './auth.guard'; 
@@ -25,13 +28,13 @@ export const AppRoutes: Routes = [
   	{ path: 'hotel/:id', 
     	component: HotelComponent 
   	},
-  	{ path: 'search-hotel/:city', 
+  	{ path: 'search-hotel', 
     	component: SearchHotelComponent 
   	},
     { path: 'login', 
       component: LoginComponent,  
     },
-    { path: 'dashboard', 
+    { path: 'admin/dashboard', 
       component: DashboardComponent,
       canActivate: [AuthGuard], 
       
@@ -40,7 +43,6 @@ export const AppRoutes: Routes = [
     { path: 'admin/hotel/add-hotel', 
       component: AddHotelComponent,
       canActivate: [AuthGuard], 
-      
     },
 
     { path: 'admin/hotel/view-hotel', 
@@ -62,6 +64,25 @@ export const AppRoutes: Routes = [
     { path: 'admin/hotel/add-gallery/:id', 
       component: ImageGalleryComponent, 
       canActivate: [AuthGuard], 
+    },
+
+
+    { path: 'admin/ads/ads-list', 
+      component: AdsListComponent,
+      canActivate: [AuthGuard], 
+      
+    },
+
+    { path: 'admin/ads/new-ad', 
+      component: NewAdComponent,
+      canActivate: [AuthGuard], 
+      
+    },
+
+    { path: 'admin/ads/edit-ad/:id', 
+      component: EditAdComponent,
+      canActivate: [AuthGuard], 
+      
     },
 
 

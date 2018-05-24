@@ -4,9 +4,9 @@
 
     <div class="row_ btn_row"> 
         <button class="ui submit button  green" routerLink="/admin/hotel/view-hotel" >View Hotel List</button>
-        <button class="ui submit button  right" (click)="addGallery()" ><i class="icon-frame-landscape"></i> Add Gallery Images</button>
+        <button class="ui submit button  right" ><i class="icon-frame-landscape"></i> Add Gallery Images</button>
      </div>
-
+		<!-- (click)="addGallery()"  -->
 </div>
 
 <div class="row">
@@ -22,7 +22,7 @@
 	    <div class="thumb_list">
 	    	<ul>
 				<li *ngFor="let gi of galleryImages ; let i = index;">
-					<span [ngStyle]="{'background-image':   'url(' + gi.image_url + ')' }"  class="g_img"></span>
+					<span [ngStyle]="{'background-image':   'url(' + fm+'gallery/'+  gi.image_url + ')' }"  class="g_img"></span>
 
 					<span class="details">
 						<span class="title">

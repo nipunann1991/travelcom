@@ -40,8 +40,11 @@
 				<div class="desc"> 
 					<h3>About Hotel</h3>
 					<p>{{hotel_details.hotel_desc}}</p> 
-				</div>
+				</div> 
+			  
 
+			</div>
+			<div class="hotel_details contact">
 				<div class="hotel_contact_details">
 					<ul> 
 						<li class="phone">
@@ -72,11 +75,8 @@
 					</ul>
 			 
 				</div> 
-
-				
-
-				
 			</div>
+			
 
 		</div>
 
@@ -154,22 +154,23 @@
 				</div>
 				
 
-				<ngx-slick *ngIf="masonryItems?.length > 0"  class="carousel deals_list col-md-12  hidden-xs" #slickModal="slick-modal" [config]="slideConfig"  >
-			        <a ngxSlickItem *ngFor="let item of masonryItems" class="slide thumbnail fancybox slide" rel="ligthbox" href="{{ item.img }}">
-			              <img src="{{ item.img }}" alt="" width="100%">
+				<!-- <ngx-slick *ngIf="masonryItems?.length > 0"  class="carousel deals_list col-md-12  hidden-xs" #slickModal="slick-modal" [config]="slideConfig"  >
+			        <a ngxSlickItem *ngFor="let item of masonryItems" class="slide thumbnail fancybox slide" data-fancybox="gallery" href="{{gallery_url}}{{ item.img }}">
+			              <img src="{{fm}}thumb/{{ item.img }}" alt="" width="100%">
 			        </a>
-			    </ngx-slick>
-			   <!--  <ng-masonry-grid class="col-md-12 "
-                    [masonryOptions]="{ transitionDuration: '0.0s', gutter: 5 }" 
+			    </ngx-slick> -->
+			    <ng-masonry-grid class="col-md-12 "
+                    [masonryOptions]="{ transitionDuration: '0.0s', gutter: 5,  itemSelector: 'ng-masonry-grid-item', percentPosition: true}" 
                     [useAnimation]="false"
                     [useImagesLoaded]="false" 
                     [scrollAnimationOptions]="{ animationEffect: 'none', minDuration : 0.4, maxDuration : 0.7 }">
 			      
-			      <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let item of masonryItems; let i = index;" > 
-			         
-			        <img src="{{item.img}}" alt="No image" />
+			      <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let item of masonryItems; let i = index;"  > 
+			         <a class="slide thumbnail fancybox slide" data-fancybox="gallery" href="{{gallery_url}}{{ item.img }}">
+			        	<img src="{{fm}}thumb/{{ item.img }}" alt="No image" />
+			         </a>
 			      </ng-masonry-grid-item>
-			    </ng-masonry-grid>   -->
+			    </ng-masonry-grid>  
 					 		 	 
 
 					 		 	<!--  You can now use ng-masonry-grid component in app.component.html -->
@@ -182,3 +183,5 @@
 	
 </section>
  
+
+  

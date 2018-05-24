@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@auth0/angular-jwt": "^1.1.0",
+    "@fancyapps/fancybox": "^3.3.5",
     "angular-datatables": "^5.0.0",
     "bootbox": "^4.4.0",
     "bootstrap": "^4.1.0",

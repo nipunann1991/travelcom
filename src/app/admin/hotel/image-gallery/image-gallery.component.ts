@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http'; 
 import 'rxjs/add/operator/toPromise';
 
-import { serverURL } from  "../../../app.global";
+import { serverURL, fileManager } from  "../../../app.global";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ViewChild } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
@@ -22,7 +22,7 @@ export class ImageGalleryComponent implements OnInit {
 
 public files: UploadFile[] = [];
 galleryImages : any = [];
-hotelID : any;
+hotelID : any; fm : any = fileManager;
 
   constructor(private http: HttpClient, private router: Router, private bootstrapGrowlService: BootstrapGrowlService, private activeRoute: ActivatedRoute) { }
 
@@ -58,17 +58,16 @@ hotelID : any;
 
   				let promise = new Promise((resolve, reject) => {
 
+  					console.log(fd)
+
 					this.http.post(serverURL+'/HotelController/imageGalleryUpload', fd, { headers: headers  })
 		          		.toPromise()
 		          		.then(data => {
 
-		          		upload_file = data
-		 				 
-		          		//self.galleryImages.push(upload_file.data.target_file);
-
-
+		          		upload_file = data;
+		 				   
 		          		const params2 = new HttpParams({
-					 		fromObject : {hotel_id: this.hotelID, image_url: upload_file.data.target_file }
+					 		fromObject : {hotel_id: this.hotelID, image_url: upload_file.data.new_file }
 					 	});
 	         			 
 	         			this.http.post(serverURL+'/HotelController/addGalleryImages',params2)
@@ -88,19 +87,13 @@ hotelID : any;
 				         		}else{
 				         			 
 				         		}
-
-
-
-				         		 
+ 
 				          		resolve();
 				        	}
 					    );
 
-
-
-		 				//this.hotel_details.image_url =  upload_file.data.target_file
-
-		 				$('.hotel_img').attr('style','background-image: url('+upload_file.data.target_file+')');
+ 
+		 				$('.hotel_img').attr('style','background-image: url('+fileManager+"gallery/"+upload_file.data.new_file+')');
 		             	$('file-drop .content .loader').remove()
 
 		             	resolve();

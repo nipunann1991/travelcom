@@ -23,6 +23,8 @@ export class HotelComponent implements OnInit {
 		overlayer: true,
 		fx: 'topLeftBottomRight', 
   	}); //the basic method
+
+  	
   
   }
 

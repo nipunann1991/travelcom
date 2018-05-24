@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'; 
-import { serverURL } from  "../../app.global";
+import { serverURL, base_url } from  "../../app.global";
 import {Router} from "@angular/router";
 
 declare var jquery:any;
@@ -23,14 +23,13 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
- 
+    $('.loader_screen').attr('style','display: none;');
 
   	$('.ui.form')
 	  .form({
 	    fields: {
 	      'username' : 'empty',
 	      'password'   : 'empty',
-	       
 	    }
 	  })
   }
@@ -62,7 +61,7 @@ export class LoginComponent implements OnInit {
 
           if (this.response.status == 200) {
             sessionStorage.setItem('token', '1234');
-            location.href="/dashboard";
+            location.href= base_url+"/#/admin/dashboard";
             //self.router.navigate(['/dashboard']);
           }
 

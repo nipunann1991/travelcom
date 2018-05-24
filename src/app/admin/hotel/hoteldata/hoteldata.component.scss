@@ -1,9 +1,18 @@
 @import '../../../../assets/sass/main';
 
+ng-masonry-grid-item{
+	width: 280px;
+	float: left;
+}
 .view_hotel{
 
 	.left_content.hotel{
 		padding: 0 15px 50px 0;
+
+
+		@include mobile(){
+			padding: 0;
+		}
 
 		.hotel_main_details{ 
 			overflow: hidden; 
@@ -13,6 +22,10 @@
 		    background: #fff;
 		    position: relative;
 
+		    @include mobile(){
+				padding: 15px;
+			}
+
 			$hotel_img_width : 200px;
 
 			.main_img{
@@ -20,17 +33,43 @@
 				height: $hotel_img_width;
 				background: #eee;
 				float: left;
-				float: left;
-			    //background-image: url(../../assets/images/properties1.jpg);
+				float: left; 
 			    background-size: cover;
 			    border: 1px #d1d1d1 solid;
 			    border-radius: 50%;
+
+			    @include tablet(){
+					width: $hotel_img_width / 2;
+					height: $hotel_img_width / 2;
+				 
+				}
+
+
+				@include mobile(){
+					width: ($hotel_img_width / 2) * 1.5;
+					height: ($hotel_img_width / 2) * 1.5;
+					margin: auto;
+					float: none;
+					margin-bottom: 30px;
+				 
+				}
 			}
 
 			.hotel_details{
 				float: left;
 				@include calc('width', '100% -  '+$hotel_img_width);
 				padding: 0 10px 0 30px; 
+
+				@include tablet(){
+					@include calc('width', '100% -  '+$hotel_img_width / 2);
+				 
+				}
+
+				@include mobile(){
+					width: 100%;
+					padding: 0;
+				 
+				}
 
 				span.property_type{
 					padding: 3px 20px;
@@ -43,11 +82,25 @@
 
 				button.book_now{
 					float: right;
+
+					@include tablet(){
+						display: none;
+					}
+
+					@include mobile(){
+						display: none;
+					}
 				}
 
 				h2{
 					margin-bottom: 0;
 					font-size: $heading_font_size - 3;
+					
+					@include mobile(){
+						font-size: $heading_font_size - 6;
+						margin-bottom: 10px;
+					}
+
 				}
 				
 				p.location{
@@ -58,6 +111,19 @@
 						color: $base_color;
 					}
 				}
+
+				&.contact{
+					@include tablet(){
+						width: 100%;
+						padding: 0;	
+					}
+
+					@include custom-width(1024px, 1300px){
+						width: 100%;
+						padding: 0;	
+					}
+				}
+
 				.hotel_contact_details{
 					margin-top: 25px;
 					
@@ -66,17 +132,32 @@
 						padding: 0;
 						display: flex;
 
+						@include mobile(){
+							display: block;
+						}
+
 						li{
 							font-size: $font_size;
 							line-height: $font_size + 8 ;
 							list-style: none;
 							width: 100%;
-							border-left: 1px #d0d0d0 solid;
+							border-left: 1px #eaeaea solid;
 							padding: 0 12px;
 
 							&:last-child{
-								border-right: 1px #d0d0d0 solid;
+								border-right: 1px #eaeaea solid;
 
+								@include mobile(){
+									border: 0;
+
+								}
+
+							}
+
+							@include mobile(){
+								border: 0; 
+								margin-bottom: 15px;
+								padding: 0; 
 							}
 
 							span{
@@ -84,10 +165,25 @@
 								text-align: center;
 
 
+								@include mobile(){  
+									text-align: left;
+								}
+
+
 								&.title{
 									margin-bottom: 5px;
 									font-weight: 600;
 
+									@include mobile(){  
+										margin-bottom: 0;
+									}
+
+								}
+
+								&.info{
+									@include mobile(){  
+										padding-left: 30px;
+									}
 								}
 							}
 
@@ -159,22 +255,7 @@
 						font-weight: 500;
 					}
 				}
-
-					
-
-				// .nav-link{
-				// 	background: #333;
-				// 	color: #fff;
-				// 	border-radius: 20px;
-				// 	margin-right: 10px;	
-
-
-				// 	&.active{
-				// 		background: $base_color;
-				// 		border-radius: 20px;
-				// 		color: #fff;
-				// 	}
-				// }
+ 
 			}
     		.tab-content{
     			border: 1px solid #dee2e6;
@@ -247,10 +328,20 @@
 
     				li{
 						float: left; 
-						width: 25%;
+						width: 33%;
 						list-style: none;
 						margin-bottom: 10px;
 						font-size: $font_size;
+
+						@include tablet(){
+							width: 50%;
+						 
+						}
+
+						@include mobile(){
+							width: 100%;
+						 
+						}
 
 						&.disabled{
 							opacity: 0.25;
