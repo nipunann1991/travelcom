@@ -25,7 +25,7 @@ export class AddHotelComponent implements OnInit {
 	public files: UploadFile[] = [];
 
 	province : any; property_type : any; service_list : any; card_list : any; fileToUpload: File = null;
-	isCheckedServices: boolean = false; isCheckedCards: boolean = false;
+	isCheckedServices: boolean = false; isCheckedCards: boolean = false; 
 
 	hotel_details : any = {
 		 ptype_id: '',
@@ -43,7 +43,7 @@ export class AddHotelComponent implements OnInit {
 
 	};
 
-	facilities : any = {}; selected_card_list : any = {}; room_type : any = []; room_type_txt : any;
+	facilities : any = {}; hotel_categories : any = {}; selected_card_list : any = {}; room_type : any = []; room_type_txt : any; categories : any = [];
 	
 
 
@@ -57,6 +57,7 @@ export class AddHotelComponent implements OnInit {
   	this.getServiceList();
   	this.getPropertyType();
   	this.getCardList();
+   	this.getCategories();
 
   }
 
@@ -90,6 +91,9 @@ export class AddHotelComponent implements OnInit {
     );
 
   }
+
+
+
 
 
 	getPropertyType() : any {
@@ -133,6 +137,23 @@ export class AddHotelComponent implements OnInit {
 	}
 
 
+	checkValueCategories(alias: any){ 
+
+	    let status = this.hotel_categories[alias];
+
+	    if (status == 0) {
+	    	this.hotel_categories[alias] = 1
+	    }else{
+	    	this.hotel_categories[alias] = 0 
+	    }
+
+
+	    console.log(this.hotel_categories);
+ 
+
+	}
+
+
 	checkValueCards(alias: any){
 	     
 	    let status = this.selected_card_list[alias];
@@ -168,12 +189,13 @@ export class AddHotelComponent implements OnInit {
 	         		if (response.status == 200 ) {
 
 	         			this.facilities['hotel_id'] = response.data.inserted_id
-
-	         			alert('added successfully');  
-
+	         			this.hotel_categories['hotel_id'] = response.data.inserted_id
+ 
 	         			const params1 = new HttpParams({
 					 		fromObject : this.facilities
 					 	});
+
+					 	
 	         			 
 	         			this.http.post(serverURL+'/HotelController/addFacilities',params1)
 				      	.toPromise()
@@ -185,10 +207,8 @@ export class AddHotelComponent implements OnInit {
 				         		console.log(response);
 
 				         		if (response.status == 200 ) { 
-
-				         			alert('');   
-
-				         			this.bootstrapGrowlService.addAlert("Added facilities successfully", BootstrapAlertType.SUCCESS);
+ 
+				         			this.bootstrapGrowlService.addAlert("Hotel has been created successfully", BootstrapAlertType.SUCCESS);
 
 				         		}else{
 				         			 
@@ -197,7 +217,32 @@ export class AddHotelComponent implements OnInit {
 				         		 
 				          		resolve();
 				        	}
-				    ); 
+				   	 	); 
+
+				      	const params3 = new HttpParams({
+					 		fromObject : this.hotel_categories
+					 	});
+
+				   	 	this.http.post(serverURL+'/HotelController/addCategories',params3)
+				      	.toPromise()
+				      	.then(
+				        	res => { 
+				        		 
+				         		let response : any  = res;
+
+				         		console.log(response);
+
+				         		if (response.status == 200 ) { 
+  
+
+				         		}else{
+				         			 
+				         		}
+
+				         		 
+				          		resolve();
+				        	}
+				    	); 
 
          			alert('added successfully');  
 
@@ -302,8 +347,32 @@ export class AddHotelComponent implements OnInit {
 	 					this.facilities[key] = 0; 
 	 			} 
 
-	 			console.log(this.facilities)
+	 			//console.log(this.facilities)
 	 		 
+	        },
+	        err => {
+	          console.log(err);
+	        }
+	    );
+
+	}
+
+
+	getCategories() : any {
+
+	  	this.http.get(serverURL+'/HotelController/getCategories')
+	    .subscribe(
+	        res => { 
+	 			this.categories = res; 
+	 			this.categories = this.categories.data
+
+	 			for (var i = 0; i < this.categories.length; i++) {
+
+	 				  	let key = this.categories[i].alias;
+	 				
+	 					this.hotel_categories[key] = 0; 
+	 			} 
+ 
 	        },
 	        err => {
 	          console.log(err);
@@ -337,52 +406,82 @@ export class AddHotelComponent implements OnInit {
 	}
 
 
+	getError(){
+		this.bootstrapGrowlService.addAlert("Uploaded file is too large. Please Upload files below 1.5MB. ", BootstrapAlertType.DANGER);
+		 
+	}
 
   	 
 	public dropped(event: UploadEvent) {
 	    this.files = event.files; 
 	    let upload_file;
+	    let error = 0;
+
 	    for (const droppedFile of event.files) {
-	 
+	 //
+	 console.log(event.files)
 	      // Is it a file?
 	      if (droppedFile.fileEntry.isFile) {
 		        
 		        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+		        
 		        fileEntry.file((file: File) => {
-	 
-	           	$('file-drop .content').append('<div class="ui active loader"></div>');
+		        	  
+		        	
+		        	if (file.size > 1500000 ) {
+		        		$('#max_upload').trigger('click');
+		        		
+		        	}else if (file.size > 1500000 ) {
 
-	          	let fd = new FormData()
-	         		 
- 			  	fd.append('file', file);
-	         	fd.append('name', file.name);
-	         	fd.append('item_id', '1');
-	 			
-	 			var headers = new HttpHeaders();
-  				headers.append('Content-Type', 'undefined');
+		        	}else{
 
-				this.http.post(serverURL+'/HotelController/fileUpload', fd, { headers: headers  })
-	          		.subscribe(data => {
+				       $('file-drop .content').append('<div class="ui active loader"></div>');
 
-	          		upload_file = data
-	 				 
+			          	let fd = new FormData()
+			         		 
+		 			  	fd.append('file', file);
+			         	fd.append('name', file.name);
+			         	fd.append('item_id', '1');
+			 			
+			 			var headers = new HttpHeaders();
+		  				headers.append('Content-Type', 'undefined');
 
-	 				this.hotel_details.image_url =  upload_file.data.new_file
+						this.http.post(serverURL+'/HotelController/fileUpload', fd, { headers: headers  })
+			          		.subscribe(data => {
 
-	 				$('.hotel_img').attr('style','background-image: url('+fileManager+""+upload_file.data.new_file+')');
-	             	$('file-drop .content .loader').remove();
+			          		upload_file = data
+			 				 
 
-	          	})
+			 				this.hotel_details.image_url =  upload_file.data.new_file
+
+			 				$('.hotel_img').attr('style','background-image: url('+fileManager+""+upload_file.data.new_file+')');
+			             	$('file-drop .content .loader').remove();
+
+			          	})
  
 	         
+
+		        	}
+	 
 	 
 	        });
+
+		        if (error == 1) {
+		        	 this.getError();
+		        }
 	      } else {
 	        // It was a directory (empty directories are added, otherwise only files)
 	        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
 	        console.log(droppedFile.relativePath, fileEntry);
 	      }
-	    }
+
+
+
+	     
+	   }
+
+	   
+
 	  }
 	 
 	  public fileOver(event){

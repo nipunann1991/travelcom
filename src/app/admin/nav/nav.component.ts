@@ -27,7 +27,15 @@ export class NavComponent implements OnInit {
 			label: 'Advertisments',
 			url: 'admin/ads/ads-list',
 			icon: 'icon-desktop-monitor'
+		},
+		{
+			id: 3,
+			label: 'Info',
+			url: 'admin/information',
+			icon: 'icon-icon'
 		}
+
+		
 	]
 
   constructor() { }

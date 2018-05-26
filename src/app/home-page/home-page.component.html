@@ -1,4 +1,43 @@
+<nav class="navbar navbar-expand-sm d-none d-sm-block navbar-dark">
+  <!-- Brand -->
+  <div class="container">
+  	
+  	<a class="navbar-brand" href="#">Logo</a>
+
+	<!-- Links -->
+	<ul class="navbar-nav pull-xs-right">
+	   <!--  <li class="nav-item">
+	      <a class="nav-link" href="#">Home</a>
+	    </li> -->
+	  	
+	  	<li class="nav-item">
+	      <a class="nav-link" routerLink="/search-hotel" [queryParams]="{ hotels: 'all' }">Hotels</a>
+	    </li>
+
+	    <li class="nav-item">
+	      <a class="nav-link" routerLink="/search-hotel" [queryParams]="{ ads: 'all' }">Browse Ads</a>
+	    </li>
+
+	    <!-- Dropdown -->
+	    <li class="nav-item dropdown">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	       Categories
+	      </a>
+	      <div class="dropdown-menu">
+	        <a *ngFor="let cat of categories" class="dropdown-item" routerLink="/search-hotel" [queryParams]="{ category: cat.alias }" >{{cat.cat_name}}</a>
+	       
+	      </div>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Contact Us</a>
+	    </li>
+
+	</ul>
+  </div>
+  
+</nav>
 <section class="slider_content container-fluid">
+
 	<div class="container inner">
 		<div class="ui form search_form">
 			<div class="title">

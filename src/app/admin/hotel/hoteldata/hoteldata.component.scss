@@ -188,8 +188,10 @@ ng-masonry-grid-item{
 							}
 
 							i{
-								margin-right: 10px;
+								margin-right: 4px;
 								color: $base_color;
+								position: relative;
+    							top: 1px;
 							}
 						}
 					} 

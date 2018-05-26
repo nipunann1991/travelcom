@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-4 block follow_us">
 				<h3>Follow <span>Us</span></h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<p>{{contact_details.follow_us}}</p>
 				<ul>
 					<li><a href=""><i class="icon-facebook"></i></a></li>
 					<li><a href=""><i class="icon-google-plus"></i></a></li> 
@@ -11,15 +11,15 @@
 			</div>
 			<div class="col-md-4 block news">
 				<h3>Latest <span>News</span></h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolore iusto sequi quia, natus laboriosam libero dolorem, esse, hic nulla quo voluptatem. Autem ea quod quidem fugiat modi libero voluptas?</p>
+				<p>{{contact_details.latest_news}}</p>
 			</div>
 			<div class="col-md-4 block contact_us">
 				<h3>Contact <span>Us</span></h3>
 				<ul>
-					<li><i class="icon-location"></i> No 123, Street Name, City, Country.</li>
-					<li><i class="icon-phone"></i>(+94) 11 123 4567</li>
-					<li><i class="icon-mobile"></i>(+94) 11 123 4567</li> 
-					<li><i class="icon-envelope"></i> info@myemail.com </li>
+					<li><i class="icon-location"></i> {{contact_details.address}} </li>
+					<li><i class="icon-phone"></i> {{contact_details.tel}} </li>
+					<li><i class="icon-mobile"></i> {{contact_details.mobile}} </li> 
+					<li><i class="icon-envelope"></i> {{contact_details.email}}  </li>
 				</ul>
 			</div>
 		</div> 

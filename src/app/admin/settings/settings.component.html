@@ -1,0 +1,50 @@
+<div class="header col-md-12">
+    <h2>Information</h2> 
+    <span class="breadcrumb_nav">Home > Information</span>
+
+     
+
+</div>
+
+<div class="body col-md-12">
+	
+<form class="ui form">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="field">
+			    <label>Address</label>
+			    <textarea [(ngModel)]="contact_details.address" [ngModelOptions]="{standalone: true}" rows="2"></textarea>
+		  	</div>
+		  <div class="field">
+		    <label>Telephone</label>
+		    <input type="text" [(ngModel)]="contact_details.tel"  [ngModelOptions]="{standalone: true}" placeholder="Telephone">
+		  </div>
+		  <div class="field">
+		    <label>Mobile</label>
+		    <input type="text" [(ngModel)]="contact_details.mobile"  [ngModelOptions]="{standalone: true}" placeholder="Mobile">
+		  </div>
+
+		   <div class="field">
+		    <label>Email</label>
+		    <input type="text" [(ngModel)]="contact_details.email"  [ngModelOptions]="{standalone: true}" placeholder="Last Name">
+		  </div>
+		   
+		  <button class="ui button green" type="button" (click)="saveInfo()">Save Info</button>
+		</div>
+
+		<div class="col-md-5 offset-md-1">
+			<div class="field">
+			    <label>Latest News</label>
+			    <textarea [(ngModel)]="contact_details.latest_news" [ngModelOptions]="{standalone: true}" rows="5"></textarea>
+		  	</div>
+		  	<div class="field">
+			    <label>Follow Us</label>
+			    <textarea [(ngModel)]="contact_details.follow_us" [ngModelOptions]="{standalone: true}" rows="5"></textarea>
+		  	</div>
+		</div>
+	</div>
+	
+	
+</form>
+
+</div>

@@ -44,6 +44,7 @@ export class EditHotelComponent implements OnInit {
 	};
 
 	facilities : any = {}; selected_card_list : any = {};  room_type : any = [];  room_type_txt : any; editMode : boolean = false;
+	hotel_categories : any = {}; categories : any = [];
 	
 
 
@@ -59,8 +60,7 @@ export class EditHotelComponent implements OnInit {
   	this.getCardList();
   	this.getHotelData();
   	this.getRoomTypes(); 
-
-
+  	this.getCategoryList();
   }
 
   
@@ -255,6 +255,20 @@ export class EditHotelComponent implements OnInit {
 
 	}
 
+	checkValueCategories(alias: any){ 
+
+	    let status = this.hotel_categories[alias];
+
+	    if (status == 0) {
+	    	this.hotel_categories[alias] = 1
+	    }else{
+	    	this.hotel_categories[alias] = 0 
+	    }
+
+	    console.log(this.hotel_categories)
+
+	}
+
 
 	checkValueCards(alias: any){
 	     
@@ -274,12 +288,12 @@ export class EditHotelComponent implements OnInit {
 
 	  	let h = this.hotel_details;
 	  
-	  	const params = new HttpParams({
-	 		fromObject : this.hotel_details
-	 	});
+		  	const params = new HttpParams({
+		 		fromObject : this.hotel_details
+		 	});
 	 
 
-		let promise = new Promise((resolve, reject) => {
+			let promise = new Promise((resolve, reject) => {
 
 		 	this.http.post(serverURL+'/HotelController/updateHotelDetails',params)
 	      	.toPromise()
@@ -302,13 +316,38 @@ export class EditHotelComponent implements OnInit {
 				      	.then(
 				        	res => { 
 				        		 
-				         		let response : any  = res;
+				         		let response : any  = res; 
 
-				         		console.log(response);
+				         		if (response.status == 200 ) {   
+				         			 
+				         		}else{
+				         			 
+				         		}
+
+				         		 
+				          		resolve();
+				        	}
+				    	); 
+
+
+				    	this.hotel_categories['hotel_id'] = this.hotelID; 
+
+	         			const params3 = new HttpParams({
+					 		fromObject : this.hotel_categories
+					 	});
+ 
+	         			 
+	         			this.http.post(serverURL+'/HotelController/editCategories',params3)
+				      	.toPromise()
+				      	.then(
+				        	res => { 
+				        		 
+				         		let response : any  = res;
+ 
 
 				         		if (response.status == 200 ) {   
 				         			
-				         			this.bootstrapGrowlService.addAlert("Added facilities successfully", BootstrapAlertType.SUCCESS);
+				         			 
 
 				         		}else{
 				         			 
@@ -317,37 +356,36 @@ export class EditHotelComponent implements OnInit {
 				         		 
 				          		resolve();
 				        	}
-				    ); 
+				    	); 
 
-         			alert('added successfully');  
 
-         			this.selected_card_list['hotel_id'] = this.hotelID;
+	         			this.selected_card_list['hotel_id'] = this.hotelID;
 
-         			const params2 = new HttpParams({
-				 		fromObject : this.selected_card_list
-				 	});
-         			 
-         			this.http.post(serverURL+'/HotelController/editCardsAccepted',params2)
-			      	.toPromise()
-			      	.then(
-			        	res => { 
-			        		 
-			         		let response : any  = res;
+	         			const params2 = new HttpParams({
+					 		fromObject : this.selected_card_list
+					 	});
+	         			 
+	         			this.http.post(serverURL+'/HotelController/editCardsAccepted',params2)
+				      	.toPromise()
+				      	.then(
+				        	res => { 
+				        		 
+				         		let response : any  = res;
 
-			         		console.log(response);
+				         		console.log(response);
 
-			         		if (response.status == 200 ) {   
+				         		if (response.status == 200 ) {   
 
-			         			this.bootstrapGrowlService.addAlert("Added accepetd cards successfully", BootstrapAlertType.SUCCESS);
+				         			this.bootstrapGrowlService.addAlert("Hotel edited successfully", BootstrapAlertType.SUCCESS);
 
-			         		}else{
-			         			 
-			         		}
+				         		}else{
+				         			 
+				         		}
 
-			         		 
-			          		resolve();
-			        	}
-				    );
+				         		 
+				          		resolve();
+				        	}
+					    );
 
 
 				    if (this.room_type.length > 0) {
@@ -440,6 +478,37 @@ export class EditHotelComponent implements OnInit {
 
 	}
 
+
+	getCategoryList() : any {
+
+		let promise = new Promise((resolve, reject) => {
+
+		  	this.http.get(serverURL+'/HotelController/getHotelCategoryList')
+		    .toPromise()
+	      	.then(
+		        res => { 
+
+		 			this.categories = res; 
+		 			this.categories = this.categories.data;  
+
+		 			this.getHotelProvidedCategories();
+ 
+
+		 			resolve();
+
+		        },
+		        err => {
+		          console.log(err);
+		        }
+		    );
+
+
+		});
+			
+		return promise;
+
+	}
+
 	deleteRoomType(obj) : any {
 
 	  
@@ -491,8 +560,7 @@ export class EditHotelComponent implements OnInit {
 	         		if (response.status == 200 ) { 
 
  						this.facilities = response.data[0];
-
- 						console.log(this.facilities)
+ 
 
  						let alias, isActive;
 
@@ -507,8 +575,62 @@ export class EditHotelComponent implements OnInit {
 		 
 			 				
 			 			}
+ 
+ 						
+ 
+	         		}else{
+	         			 
+	         		}
 
-			 			console.log( this.service_list  );
+	         		 
+	          		resolve();
+	        	}
+	      );
+		   
+		   
+		});
+			
+		return promise;
+
+	}
+
+
+	getHotelProvidedCategories() : any {  
+
+	    let hotel_id : any = { 'hotel_id': this.hotelID };
+	  
+	  	const params = new HttpParams({
+	 		fromObject : hotel_id
+	 	});
+	 
+
+		let promise = new Promise((resolve, reject) => {
+
+		 	this.http.post(serverURL+'/HotelController/getHotelProvidedCategories',params)
+	      	.toPromise()
+	      	.then(
+	        	res => { 
+	        		 
+	         		let response : any  = res;
+
+	         		if (response.status == 200 ) { 
+
+ 						this.hotel_categories = response.data[0];
+ 
+ 						let alias, isActive;
+
+			 			for (var i = 0; i <  this.categories.length; i++) { 
+			 				
+			 				alias = ''+this.categories[i].alias;
+			 				isActive = '';
+
+			 				this.hotel_categories[alias] == 1 ? isActive = true :  isActive = false; 
+
+			 				this.categories[i].isActive = isActive;
+		 
+			 				
+			 			}
+ 
  						
  
 	         		}else{

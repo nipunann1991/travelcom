@@ -34,6 +34,7 @@ import { AdsListComponent } from './admin/ads/ads-list/ads-list.component';
 import { NewAdComponent } from './admin/ads/new-ad/new-ad.component';
 import { EditAdComponent } from './admin/ads/edit-ad/edit-ad.component';
 import { AdsComponent } from './ads/ads.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AdsComponent } from './ads/ads.component';
     AdsListComponent,
     NewAdComponent,
     EditAdComponent,
-    AdsComponent, 
+    AdsComponent,
+    SettingsComponent, 
 
   ],
   imports: [

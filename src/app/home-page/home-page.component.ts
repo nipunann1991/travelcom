@@ -16,7 +16,7 @@ declare var $ :any;
 export class HomePageComponent implements OnInit {
 
 	
-	hotel : any = []; search_txt : string = '';   content : any = []; search_hotel_id: number; selected_city: string;
+	hotel : any = []; categories : any = []; search_txt : string = '';   content : any = []; search_hotel_id: number; selected_city: string;
 	dataLoaded : boolean = true; ads: any; fm : any = fileManager; filepath : string = this.fm+"ads/"; 
 
   cities: any = [{
@@ -105,56 +105,70 @@ export class HomePageComponent implements OnInit {
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
+   
   ]};
  
-
-// slides : any = [
-//     {img: "assets/images/ad1.jpg"}, 
-//     {img: "assets/images/ad2.jpg"}, 
-//   ];
-
+ 
 
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  ngOnInit() {
+    ngOnInit() { 
 
-   
-    this.selectAds();
-  	this.getHotel();  
-  }
+      this.selectAds();
+    	this.getHotel();  
+      this.getCategories();
+
+    }
 
 
   getHotel(){
 
-  	this.http.get(serverURL+'/HomePageController/getHotels')
-    .subscribe(
-        res => { 
- 			this.hotel = res; 
+    	this.http.get(serverURL+'/HomePageController/getHotels')
+      .subscribe(
+          res => { 
+   			this.hotel = res; 
 
- 			let hotelData : any = res; 
- 			hotelData = hotelData.data
+   			let hotelData : any = res; 
+   			hotelData = hotelData.data
 
- 			  this.hotel = hotelData;
+   			  this.hotel = hotelData;
 
-         setTimeout(function(){
-           $('.loader_screen').fadeOut();
-         },1000);
-        
+           setTimeout(function(){
+             $('.loader_screen').fadeOut();
+           },1000);
+          
 
- 
-        },
-        err => {
-          console.log(err);
-        }
-    );
+   
+          },
+          err => {
+            console.log(err);
+          }
+      );
 
   }
 
+  
 
+  getCategories() : any {
+
+      this.http.get(serverURL+'/HotelController/getCategories')
+      .subscribe(
+          res => { 
+
+           this.categories = res; 
+           this.categories = this.categories.data
+
+           console.log(this.categories)
+         
+ 
+          },
+          err => {
+            console.log(err);
+          }
+      );
+
+  }
 
   viewAllHotels(){
 

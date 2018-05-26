@@ -13,6 +13,7 @@ import { ImageGalleryComponent } from './admin/hotel/image-gallery/image-gallery
 import { AdsListComponent } from './admin/ads/ads-list/ads-list.component'; 
 import { NewAdComponent } from './admin/ads/new-ad/new-ad.component';
 import { EditAdComponent } from './admin/ads/edit-ad/edit-ad.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 
 import { AuthGuard } from './auth.guard'; 
@@ -84,6 +85,14 @@ export const AppRoutes: Routes = [
       canActivate: [AuthGuard], 
       
     },
+
+    { path: 'admin/information', 
+      component:  SettingsComponent,
+      canActivate: [AuthGuard], 
+      
+    },
+
+   
 
 
     

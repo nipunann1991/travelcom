@@ -1,6 +1,33 @@
 @import '../../assets/sass/main';
 
+nav.navbar{
+	position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 500;
+    padding: 15px 0;
 
+	ul.navbar-nav{
+		margin-left: auto;
+
+		li{
+			a{
+				color: #fff;
+				font-size: 16px;
+				padding: 0 10px;
+
+				&:hover{
+					color: $base_color;
+				}
+
+				&.dropdown-item{
+					color: #111;
+					padding: 3px 20px;
+				}
+			}
+		}
+	}
+}
 
 
 section{
@@ -59,7 +86,7 @@ section{
 section.slider_content{
 	 
 	@include background-image('../../assets/images/slider.jpg',55% 80%); 
-	height: 500px;
+	height: 550px;
 	width: 100%; 
 	position: relative;
 	overflow: inherit;
@@ -92,6 +119,10 @@ section.slider_content{
 				h1{
 					font-size: 45px;
 					margin-bottom: 15px;
+
+					@include mobile(){
+						font-size: 35px;
+					}
 				}
 
 				h3{ 
@@ -121,7 +152,6 @@ section.slider_content{
 		} 
 	} 
 }
-
 
 
 section.listings{

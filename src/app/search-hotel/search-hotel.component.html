@@ -13,8 +13,10 @@
 					  	<div class="field property_type">
 						    <label class="title_label">Property Type</label>
 
-						    <div *ngFor="let pt of property_type" class="ui checkbox">
-							  	<input type="checkbox" name="{{pt.ptype_name}}" id="{{pt.ptype_name}}">
+						    <div *ngFor="let pt of property_type; let i = index; " class="ui checkbox">
+							  	<input type="checkbox" name="{{pt.ptype_name}}" id="{{pt.ptype_name}}" [checked]="pt.checked" (change)='onCheckboxChange(pt.ptype_id, i)'>
+								
+
 							  	<label for="{{pt.ptype_name}}">{{pt.ptype_name}}</label>
 							</div>
 							 
@@ -32,7 +34,7 @@
 						    
 					  	</div>
 
-					  	<div class="field activities">
+					  	<!-- <div class="field activities">
 						    <label class="title_label">Activities</label>
 
 						    <div class="ui checkbox">
@@ -51,7 +53,7 @@
 							  	<input type="checkbox" name="example">
 							  	<label>Water Fall Abseiling</label>
 							</div>
-					  	</div>
+					  	</div> -->
 
 
 
@@ -70,6 +72,10 @@
 					<h3>Search Results <a class="ui red circular label">{{result_length}}</a></h3>
 
 					<span class="showing">Showing 25 results per page</span>
+				</div>
+
+				<div class="no_results" *ngIf="result_length == 0" >
+					<h2>No Results found</h2>
 				</div>
 				
 				<div *ngFor="let h of hotel" class="hotels block" routerLink="/hotel/{{h.hotel_id}}"> 
@@ -91,6 +97,19 @@
 						</ul> 
 					</div>
 				</div> 
+
+				<ng-masonry-grid class="col-md-12 "
+                    [masonryOptions]="{ transitionDuration: '0.0s', gutter: 5,  itemSelector: 'ng-masonry-grid-item', percentPosition: true}" 
+                    [useAnimation]="false"
+                    [useImagesLoaded]="false" 
+                    [scrollAnimationOptions]="{ animationEffect: 'none', minDuration : 0.4, maxDuration : 0.7 }">
+			      
+			      <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let item of ads; let i = index;"  > 
+			         <a class="slide thumbnail fancybox slide" data-fancybox="gallery" href="{{gallery_url}}{{ item.img_url }}">
+			        	<img src="{{fm}}thumb/{{ item.img_url }}" alt="No image" />
+			         </a>
+			      </ng-masonry-grid-item>
+			    </ng-masonry-grid>  
 
 				
 
